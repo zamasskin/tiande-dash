@@ -6,6 +6,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import { selectPeriodStart, selectPeriodEnd, setPeriod } from '../filterSlice';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
 import { DateRangePicker } from 'react-dates';
+import { dateFormat } from '../../../constants';
 
 function Period() {
   const dispatch = useAppDispatch()
@@ -19,7 +20,7 @@ function Period() {
     endDate={periodEnd}
     endDateId="your_unique_end_date_id"
     isOutsideRange={() => false}
-    displayFormat="DD.MM.YYYY"
+    displayFormat={dateFormat}
     onDatesChange={({ startDate, endDate }) => {
       dispatch(setPeriod([startDate, endDate]))
     }}

@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import { Container, Navbar, Row, Col} from 'react-bootstrap'
 
 import Filter from '../features/indicators/Filter'
+import ComparativeAnalysis from '../features/indicators/ComparativeAnalysis'
 
 
 const IndicatorsPage: NextPage = () => { 
@@ -19,8 +20,11 @@ const IndicatorsPage: NextPage = () => {
       </Row>
       <Row>
         <Col>
-          2
+          <h2>Сравнительных анализ абс. отклонений</h2>
         </Col>
+      </Row>
+      <Row className="mb-3">
+        <ComparativeAnalysis/>
       </Row>
     </Container>
   </>
