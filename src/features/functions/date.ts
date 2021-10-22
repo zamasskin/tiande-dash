@@ -6,5 +6,5 @@ export function getDefaultDateRange() {
   if (startDate.format("YYYY-MM-DD") === dateEnd.format("YYYY-MM-DD")) {
     startDate = startDate.add(-1, "days");
   }
-  return [startDate, dateEnd];
+  return [startDate.toDate(), dateEnd.toDate()];
 }

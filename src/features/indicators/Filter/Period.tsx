@@ -3,10 +3,11 @@ import React, { useState } from 'react'
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
-import { selectPeriodStart, selectPeriodEnd, setPeriod } from '../filterSlice';
+import { selectPeriodStart, selectPeriodEnd, setPeriodStart, setPeriodEnd } from '../filterSlice';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
 import { DateRangePicker } from 'react-dates';
 import { dateFormat } from '../../../constants';
+import moment from 'moment';
 
 function Period() {
   const dispatch = useAppDispatch()
@@ -15,14 +16,15 @@ function Period() {
   const [focusedInput, setFocusedInput] = useState();
 
   return <DateRangePicker
-    startDate={periodStart}
+    startDate={moment(periodStart)}
     startDateId="your_unique_start_date_id"
-    endDate={periodEnd}
+    endDate={moment(periodEnd)}
     endDateId="your_unique_end_date_id"
     isOutsideRange={() => false}
     displayFormat={dateFormat}
-    onDatesChange={({ startDate, endDate }) => {
-      dispatch(setPeriod([startDate, endDate]))
+    onDatesChange={({ startDate, endDate}) => {
+      startDate && dispatch(setPeriodStart(startDate.toDate().getTime()))
+      endDate && dispatch(setPeriodEnd(endDate.toDate().getTime()))
     }}
     focusedInput={focusedInput}
     onFocusChange={(focusedInput: any) => setFocusedInput(focusedInput)}

@@ -4,7 +4,8 @@ import { getDefaultDateRange } from "../functions/date";
 
 export type yn = 0 | 1 | 2;
 export interface FilterState {
-  period: moment.Moment[];
+  periodStart: number;
+  periodEnd: number;
   country: number;
   storage: string;
   currency: string;
@@ -13,13 +14,16 @@ export interface FilterState {
   pickup: string;
   payOrder: yn;
   registrationMethod: string;
-  periodUserNew: moment.Moment[];
+  periodUserNew: Date[];
   isEs: yn;
   isBoutique: yn;
 }
 
+const [startDate, endDate] = getDefaultDateRange();
+
 const initialState: FilterState = {
-  period: getDefaultDateRange(),
+  periodStart: startDate.getTime(),
+  periodEnd: endDate.getTime(),
   country: 0,
   storage: "",
   currency: "",
@@ -37,8 +41,11 @@ export const indicatorsFilterSlice = createSlice({
   name: "indicatorsFilter",
   initialState,
   reducers: {
-    setPeriod(state, action: PayloadAction<moment.Moment[]>) {
-      state.period = action.payload;
+    setPeriodStart(state, action: PayloadAction<number>) {
+      state.periodStart = action.payload;
+    },
+    setPeriodEnd(state, action: PayloadAction<number>) {
+      state.periodEnd = action.payload;
     },
     setCountry(state, action: PayloadAction<number>) {
       state.country = action.payload;
@@ -64,7 +71,7 @@ export const indicatorsFilterSlice = createSlice({
     setRegistrationMethod(state, action: PayloadAction<string>) {
       state.registrationMethod = action.payload;
     },
-    setPeriodUserNew(state, action: PayloadAction<moment.Moment[]>) {
+    setPeriodUserNew(state, action: PayloadAction<Date[]>) {
       state.periodUserNew = action.payload;
     },
     setIsEs(state, action: PayloadAction<yn>) {
@@ -77,7 +84,6 @@ export const indicatorsFilterSlice = createSlice({
 });
 
 export const {
-  setPeriod,
   setCountry,
   setStorage,
   setCurrency,
@@ -89,12 +95,14 @@ export const {
   setPeriodUserNew,
   setIsEs,
   setIsBoutique,
+  setPeriodStart,
+  setPeriodEnd,
 } = indicatorsFilterSlice.actions;
 
 export const selectPeriodStart = (state: AppState) =>
-  state.indicatorsFilter.period[0];
+  state.indicatorsFilter.periodStart;
 
 export const selectPeriodEnd = (state: AppState) =>
-  state.indicatorsFilter.period[1];
+  state.indicatorsFilter.periodEnd;
 
 export default indicatorsFilterSlice.reducer;

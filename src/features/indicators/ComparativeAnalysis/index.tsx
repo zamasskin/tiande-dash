@@ -1,10 +1,17 @@
 
+import { useEffect } from 'react'
 import { Col, Card} from 'react-bootstrap'
 import { useAppSelector } from '../../../app/hooks';
 import { selectPeriodEnd, selectPeriodStart } from '../filterSlice';
 import {dateFormat} from '../../../constants'
 
 function ComparativeAnalysis() {
+  const periodStart = useAppSelector(selectPeriodStart);
+  const periodEnd = useAppSelector(selectPeriodEnd);
+
+  useEffect(() => {
+    // console.log(periodStart, periodEnd)
+  })
   return (
     <>
       <Col>
@@ -39,7 +46,12 @@ function ComparativeAnalysis() {
 ComparativeAnalysis.Card = function({title, price, percent}) {
   const periodStart = useAppSelector(selectPeriodStart);
   const periodEnd = useAppSelector(selectPeriodEnd);
-  const period = `${periodStart.format(dateFormat)} - ${periodEnd.format(dateFormat)}`
+  // const strPeriod = () => `${periodStart.format(dateFormat)} - ${periodEnd.format(dateFormat)}`
+  // const period = `${periodStart.format(dateFormat)} - ${periodEnd.format(dateFormat)}`
+  useEffect(() => {
+    // console.log(strPeriod())
+  })
+  const period = ""
   return (
     <Card className="shadow-sm">
       <Card.Body>
