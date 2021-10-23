@@ -1,42 +1,56 @@
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Col, Card} from 'react-bootstrap'
 import { useAppSelector } from '../../../app/hooks';
 import { selectPeriodEnd, selectPeriodStart } from '../filterSlice';
 import {dateFormat} from '../../../constants'
+import moment from 'moment';
 
 function ComparativeAnalysis() {
   const periodStart = useAppSelector(selectPeriodStart);
   const periodEnd = useAppSelector(selectPeriodEnd);
+  const [indicators, setData] = useState([]);
+  const def = {price: '0 руб', percent: '0%'}
+  const [
+    salesMonth=def, salesYear = def,
+    checkMonth=def, checkYear = def
+  ] = indicators
+
 
   useEffect(() => {
-    // console.log(periodStart, periodEnd)
-  })
+    setData([
+      {price: '0 руб', percent: '5%'},
+      {price: '1 руб', percent: '6%'},
+      {price: '2 руб', percent: '7%'},
+      {price: '3 руб', percent: '8%'},
+    ])
+    console.log(periodStart, periodEnd)
+  }, [periodStart, periodEnd])
   return (
     <>
       <Col>
         <ComparativeAnalysis.Card 
           title="Продажи 1 месяц" 
-          price="-323 235,85 руб"
-          percent="-34,61%"/>
+          price={salesMonth.price}
+          percent={salesMonth.percent}/>
       </Col>
       <Col>
         <ComparativeAnalysis.Card 
           title="Продажи 1 год" 
-          price="-270 390,11 руб"
-          percent="-30,69%"/>
+          price={salesYear.price}
+          percent={salesYear.percent}/>
       </Col>
       <Col>
         <ComparativeAnalysis.Card 
           title="Средний чек 1 месяц" 
-          price="2,77 руб"
-          percent="0,14%"/>
+          price={checkMonth.price}
+          percent={checkMonth.percent}/>
       </Col>
       <Col>
         <ComparativeAnalysis.Card 
           title="Средний чек 1 год" 
-          price="-2 030,71 руб"
-          percent="-51,39%"/>
+          price={checkYear.price}
+          percent={checkYear.percent}/>
       </Col>
     </>
   )
@@ -46,12 +60,7 @@ function ComparativeAnalysis() {
 ComparativeAnalysis.Card = function({title, price, percent}) {
   const periodStart = useAppSelector(selectPeriodStart);
   const periodEnd = useAppSelector(selectPeriodEnd);
-  // const strPeriod = () => `${periodStart.format(dateFormat)} - ${periodEnd.format(dateFormat)}`
-  // const period = `${periodStart.format(dateFormat)} - ${periodEnd.format(dateFormat)}`
-  useEffect(() => {
-    // console.log(strPeriod())
-  })
-  const period = ""
+  const period =  `${moment(periodStart).format(dateFormat)} - ${moment(periodEnd).format(dateFormat)}`
   return (
     <Card className="shadow-sm">
       <Card.Body>
