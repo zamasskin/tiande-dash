@@ -3,10 +3,6 @@ import React, { useState } from 'react'
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
-
-import 'react-modern-calendar-datepicker/lib/DatePicker.css';
-import DatePicker from 'react-modern-calendar-datepicker';
-
 import { selectPeriodStart, selectPeriodEnd, setPeriodStart, setPeriodEnd } from '../filterSlice';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
 import { DateRangePicker } from 'react-dates';
