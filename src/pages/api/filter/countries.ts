@@ -1,4 +1,5 @@
 import type { NextApiHandler } from "next";
+
 import { qb } from "../../../settings/api";
 
 const countriesHandler: NextApiHandler = async (request, response) => {
