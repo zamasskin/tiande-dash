@@ -13,7 +13,7 @@ function Country({useId = 0, allowed = true}) {
   
 
   return (
-    <Form.Select>
+    <Form.Select size="lg">
       {selectOptions.map((selectOption, i) => 
         <option key={i} value={selectOption.value}>{selectOption.text}</option>)}
     </Form.Select>
