@@ -14,3 +14,5 @@ export const qb = knex({
     },
   },
 });
+
+export const sessionApiUrl = "https://tiande.ru/api/v1/session.php";
