@@ -1,22 +1,20 @@
-import axios from 'axios';
 import React, { useState } from 'react'
-import {Form} from 'react-bootstrap'
-import { fetchCountry } from '../../../models/api/filter';
+
+import { useAppSelector, useAppDispatch } from '../../../app/hooks'
+import { selectCountry, setCountry } from '../filterSlice';
+
+import CountryBase from '../../components/filter/Country'
 
 function Country({useId = 0, allowed = true}) {
-  const none = {value: 0, text: 'Все страны'}
-  const [selectOptions, setOptions] = useState([none]);
-
-  fetchCountry(useId, allowed)
-    .then((data) => setOptions([none, ...data]))
-    .catch(err => console.log(err))
-  
-
+  const dispatch = useAppDispatch()
+  const value = useAppSelector(selectCountry)
   return (
-    <Form.Select size="lg">
-      {selectOptions.map((selectOption, i) => 
-        <option key={i} value={selectOption.value}>{selectOption.text}</option>)}
-    </Form.Select>
+    <>
+      <CountryBase 
+        value={value} 
+        onSelect={(id) =>  dispatch(setCountry(id))}
+      />
+    </>
   )
 }
 

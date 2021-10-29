@@ -1,4 +1,3 @@
-import CountrySelect from "./CountrySelect";
-import PeriodSelect from "./PeriodSelect";
+import Country from "./Country";
 
-export { CountrySelect, PeriodSelect };
+export { Country };
