@@ -6,6 +6,8 @@ import 'react-dates/lib/css/_datepicker.css';
 import { DateRangePicker } from 'react-dates';
 import { dateFormat } from '../../../constants';
 
+
+
 function Period({startDate, endDate, onChange, name}) {
   const [focusedInput, setFocusedInput] = useState();
   const startDateId = name + '_start';

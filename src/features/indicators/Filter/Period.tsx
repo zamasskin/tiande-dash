@@ -1,34 +1,23 @@
-import React, { useState } from 'react'
-
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
+import moment from 'moment';
 
 import { selectPeriodStart, selectPeriodEnd, setPeriodStart, setPeriodEnd } from '../filterSlice';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
-import { DateRangePicker } from 'react-dates';
-import { dateFormat } from '../../../constants';
-import moment from 'moment';
+
+import PeriodBase from '../../components/filter/Period'
 
 function Period() {
   const dispatch = useAppDispatch()
   const periodStart = useAppSelector(selectPeriodStart);
   const periodEnd = useAppSelector(selectPeriodEnd);
-  const [focusedInput, setFocusedInput] = useState();
 
-  return <DateRangePicker
+  return <PeriodBase 
     startDate={moment(periodStart)}
-    startDateId="your_unique_start_date_id"
     endDate={moment(periodEnd)}
-    endDateId="your_unique_end_date_id"
-    isOutsideRange={() => false}
-    displayFormat={dateFormat}
-    onDatesChange={({ startDate, endDate}) => {
+    name="period"
+    onChange={({ startDate, endDate}) => {
       startDate && dispatch(setPeriodStart(startDate.toDate().getTime()))
       endDate && dispatch(setPeriodEnd(endDate.toDate().getTime()))
-    }}
-    focusedInput={focusedInput}
-    onFocusChange={(focusedInput: any) => setFocusedInput(focusedInput)}
-  />
+    }}/>
 }
 
 export default Period;
