@@ -24,7 +24,6 @@ function ComparativeAnalysis() {
       {price: '2 руб', percent: '7%'},
       {price: '3 руб', percent: '8%'},
     ])
-    console.log(periodStart, periodEnd)
   }, [periodStart, periodEnd])
   return (
     <>

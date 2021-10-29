@@ -1,22 +1,18 @@
-import axios from 'axios';
-import React, { useState } from 'react'
-import {Form} from 'react-bootstrap'
-import { fetchStorage } from '../../../models/api/filter';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks'
+import {selectStorage, setStorage} from '../filterSlice'
+
+import StoragesBase from '../../components/filter/Storages'
 
 function Storages() {
-  const none = {value: 0, text: 'Все страны'}
-  const [selectOptions, setOptions] = useState([none]);
-
-  fetchStorage()
-    .then((data) => setOptions([none, ...data]))
-    .catch(err => console.log(err))
-
-
+  const dispatch = useAppDispatch()
+  const value = useAppSelector(selectStorage)
   return (
-    <Form.Select size="lg">
-      {selectOptions.map((selectOption, i) => 
-        <option key={i} value={selectOption.value}>{selectOption.text}</option>)}
-    </Form.Select>
+    <>
+     <StoragesBase 
+      size="lg"
+      value={value}
+      onChange={(ev: any) => dispatch(setStorage(ev.target.value))}/>
+    </>
   )
 }
 
