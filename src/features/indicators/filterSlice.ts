@@ -114,4 +114,6 @@ export const selectCurrency = (state: AppState) =>
 export const selectStorage = (state: AppState) =>
   state.indicatorsFilter.storage;
 
+export const selectIsApp = (state: AppState) => state.indicatorsFilter.isApp;
+
 export default indicatorsFilterSlice.reducer;
