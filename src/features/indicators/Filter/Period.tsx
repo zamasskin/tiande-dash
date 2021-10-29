@@ -11,8 +11,8 @@ function Period() {
   const periodEnd = useAppSelector(selectPeriodEnd);
 
   return <PeriodBase 
-    startDate={moment(periodStart)}
-    endDate={moment(periodEnd)}
+    startDate={periodStart > 0 ? moment(periodStart) : null}
+    endDate={periodEnd > 0 ? moment(periodEnd): null}
     name="period"
     onChange={({ startDate, endDate}) => {
       startDate && dispatch(setPeriodStart(startDate.toDate().getTime()))
