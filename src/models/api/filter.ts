@@ -43,3 +43,8 @@ export async function fetchCurrencies() {
   const response = await axios.post<Response>("/api/filter/currencies");
   return prepareResponse(response);
 }
+
+export async function fetchShipmentMethod() {
+  const response = await axios.post<Response>("/api/filter/shipment-method");
+  return prepareResponse(response);
+}
