@@ -4,13 +4,15 @@ import {FormSelect, FormSelectProps} from 'react-bootstrap'
 import { fetchCountry } from '../../../models/api/filter';
 interface CountryProps extends FormSelectProps {
   value?: number,
-  useId?: number;
-  allowed?: boolean;
+  params?: {
+    useId?: number;
+    allowed?: boolean;
+  } 
 }
 
 
 function Country(props: CountryProps) {
-  const {useId = 0, allowed = true} = props;
+  const {useId = 0, allowed = true} = props.params;
   const none = {value: 0, text: 'Все страны'}
   const [selectOptions, setOptions] = useState([none]);
 
@@ -20,7 +22,7 @@ function Country(props: CountryProps) {
   
 
   return (
-    <FormSelect {...props}>
+    <FormSelect size="lg" {...props}>
       {selectOptions.map((selectOption, i) => 
         <option key={i} value={selectOption.value}>{selectOption.text}</option>)}
     </FormSelect>
