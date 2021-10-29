@@ -119,4 +119,6 @@ export const selectIsApp = (state: AppState) => state.indicatorsFilter.isApp;
 export const selectIsLoyalty = (state: AppState) =>
   state.indicatorsFilter.loyalty;
 
+export const selectPickup = (state: AppState) => state.indicatorsFilter.pickup;
+
 export default indicatorsFilterSlice.reducer;

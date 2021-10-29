@@ -1,5 +1,5 @@
 
-import {Card, Row, Col, FormGroup, FormLabel, FormSelect} from 'react-bootstrap'
+import {Card, Row, Col, Form} from 'react-bootstrap'
 
 import Period from './Period'
 import Country from './Country'
@@ -7,48 +7,43 @@ import Storages from './Storages'
 import Currencies from './Currencies'
 import AppSelect from './AppSelect'
 import IsLoyalty from './IsLoyalty'
+import ShipmentMethod from './ShipmentMethod'
 
 function Filter() {
   return <Card bg="light" className="shadow-sm">
     <Card.Body>
-      <Row>
-        <Col md={2}>
-          <FormGroup>
-            <FormLabel>Период</FormLabel>
+      <Form>
+        <Row>
+          <Form.Group as={Col} md="2" controlId="period" className="mb-3">
+            <Form.Label>Период</Form.Label>
             <Period></Period>
-          </FormGroup>
-        </Col>
-        <Col md={2}>
-          <FormGroup>
-            <FormLabel>Страна</FormLabel>
+          </Form.Group>
+          <Form.Group as={Col} md="2" controlId="country" className="mb-3">
+            <Form.Label>Страна</Form.Label>
             <Country />
-          </FormGroup>
-        </Col>
-        <Col md={2}>
-          <FormGroup>
-            <FormLabel>Склад</FormLabel>
+          </Form.Group>
+          <Form.Group as={Col} md="2" controlId="storage" className="mb-3">
+            <Form.Label>Склад</Form.Label>
             <Storages />
-          </FormGroup>
-        </Col>
-        <Col md={2}>
-          <FormGroup>
-          <FormLabel>Валюты</FormLabel>
-          <Currencies/>
-          </FormGroup>
-        </Col>
-        <Col md={2}>
-          <FormGroup>
-          <FormLabel>Приложение</FormLabel>
-          <AppSelect/>
-          </FormGroup>
-        </Col>
-        <Col md={2}>
-          <FormGroup>
-          <FormLabel>Заказы лояльности</FormLabel>
-          <IsLoyalty/>
-          </FormGroup>
-        </Col>
-      </Row>
+          </Form.Group>
+          <Form.Group as={Col} md="2" controlId="currency" className="mb-3">
+            <Form.Label>Валюта</Form.Label>
+            <Currencies/>
+          </Form.Group>
+          <Form.Group as={Col} md="2" controlId="is-app" className="mb-3">
+            <Form.Label>Приложение</Form.Label>
+            <AppSelect/>
+          </Form.Group>
+          <Form.Group as={Col} md="2" controlId="is-loyalty" className="mb-3">
+            <Form.Label>Заказы лояльности</Form.Label>
+            <IsLoyalty/>
+          </Form.Group>
+          <Form.Group as={Col} md="2" controlId="shipment-method" className="mb-3">
+            <Form.Label>Самовывоз</Form.Label>
+            <ShipmentMethod/>
+          </Form.Group>
+        </Row>
+      </Form>
     </Card.Body>
   </Card>
 }
