@@ -121,4 +121,7 @@ export const selectIsLoyalty = (state: AppState) =>
 
 export const selectPickup = (state: AppState) => state.indicatorsFilter.pickup;
 
+export const selectPayOrder = (state: AppState) =>
+  state.indicatorsFilter.payOrder;
+
 export default indicatorsFilterSlice.reducer;

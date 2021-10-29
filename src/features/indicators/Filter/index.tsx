@@ -8,6 +8,7 @@ import Currencies from './Currencies'
 import AppSelect from './AppSelect'
 import IsLoyalty from './IsLoyalty'
 import ShipmentMethod from './ShipmentMethod'
+import IsPay from './IsPay'
 
 function Filter() {
   return <Card bg="light" className="shadow-sm">
@@ -41,6 +42,10 @@ function Filter() {
           <Form.Group as={Col} md="2" controlId="shipment-method" className="mb-3">
             <Form.Label>Самовывоз</Form.Label>
             <ShipmentMethod/>
+          </Form.Group>
+          <Form.Group as={Col} md="2" controlId="is-pay" className="mb-3">
+            <Form.Label>Оплаченные заказы</Form.Label>
+            <IsPay />
           </Form.Group>
         </Row>
       </Form>
