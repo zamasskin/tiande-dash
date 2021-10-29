@@ -9,6 +9,7 @@ import AppSelect from './AppSelect'
 import IsLoyalty from './IsLoyalty'
 import ShipmentMethod from './ShipmentMethod'
 import IsPay from './IsPay'
+import RegisterMethod from './RegisterMethod'
 
 function Filter() {
   return <Card bg="light" className="shadow-sm">
@@ -46,6 +47,10 @@ function Filter() {
           <Form.Group as={Col} md="2" controlId="is-pay" className="mb-3">
             <Form.Label>Оплаченные заказы</Form.Label>
             <IsPay />
+          </Form.Group>
+          <Form.Group as={Col} md="2" controlId="register-method" className="mb-3">
+            <Form.Label>Метод регистрации</Form.Label>
+            <RegisterMethod />
           </Form.Group>
         </Row>
       </Form>

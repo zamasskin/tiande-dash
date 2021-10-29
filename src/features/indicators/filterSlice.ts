@@ -124,4 +124,7 @@ export const selectPickup = (state: AppState) => state.indicatorsFilter.pickup;
 export const selectPayOrder = (state: AppState) =>
   state.indicatorsFilter.payOrder;
 
+export const selectRegistrationMethod = (state: AppState) =>
+  state.indicatorsFilter.registrationMethod;
+
 export default indicatorsFilterSlice.reducer;
