@@ -3,6 +3,7 @@ import {Card, Row, Col, FormGroup, FormLabel, FormSelect} from 'react-bootstrap'
 
 import Period from './Period'
 import Country from './Country'
+import Storages from './Storages'
 
 function Filter() {
   return <Card bg="light" className="shadow-sm">
@@ -20,6 +21,13 @@ function Filter() {
             <Country />
           </FormGroup>
         </Col>
+        <Col md={2}>
+          <FormGroup>
+            <FormLabel>Склад</FormLabel>
+            <Storages />
+          </FormGroup>
+        </Col>
+       
       </Row>
     </Card.Body>
   </Card>

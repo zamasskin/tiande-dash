@@ -33,3 +33,8 @@ export async function fetchCountry(useId = 0, allowed = true) {
 
   return prepareResponse(response);
 }
+
+export async function fetchStorage() {
+  const response = await axios.post<Response>("/api/filter/storages");
+  return prepareResponse(response);
+}
