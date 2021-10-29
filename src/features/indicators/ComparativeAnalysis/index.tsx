@@ -2,13 +2,12 @@
 import { useEffect, useState } from 'react'
 import { Col, Card} from 'react-bootstrap'
 import { useAppSelector } from '../../../app/hooks';
-import { selectPeriodEnd, selectPeriodStart } from '../filterSlice';
+import { selectPeriodEnd, selectPeriodStart, selectFilterIndicator } from '../filterSlice';
 import {dateFormat} from '../../../constants'
 import moment from 'moment';
 
 function ComparativeAnalysis() {
-  const periodStart = useAppSelector(selectPeriodStart);
-  const periodEnd = useAppSelector(selectPeriodEnd);
+  const filter = useAppSelector(selectFilterIndicator)
   const [indicators, setData] = useState([]);
   const def = {price: '0 руб', percent: '0%'}
   const [
@@ -24,7 +23,7 @@ function ComparativeAnalysis() {
       {price: '2 руб', percent: '7%'},
       {price: '3 руб', percent: '8%'},
     ])
-  }, [periodStart, periodEnd])
+  }, [filter])
   return (
     <>
       <Col>
