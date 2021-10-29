@@ -139,4 +139,6 @@ export const selectPeriodNewStart = (state: AppState) =>
 export const selectPeriodNewEnd = (state: AppState) =>
   state.indicatorsFilter.periodUserNewEnd;
 
+export const selectIsEs = (state: AppState) => state.indicatorsFilter.isEs;
+
 export default indicatorsFilterSlice.reducer;
