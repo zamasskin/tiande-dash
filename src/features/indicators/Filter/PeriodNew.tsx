@@ -10,7 +10,7 @@ import { useAppSelector, useAppDispatch } from '../../../app/hooks'
 
 import PeriodBase from '../../components/filter/Period'
 
-function Period() {
+function PeriodNew() {
   const dispatch = useAppDispatch()
   const periodStart = useAppSelector(selectPeriodNewStart);
   const periodEnd = useAppSelector(selectPeriodNewEnd);
@@ -25,4 +25,4 @@ function Period() {
     }}/>
 }
 
-export default Period;
+export default PeriodNew;

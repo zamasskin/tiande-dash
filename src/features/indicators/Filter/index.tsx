@@ -10,6 +10,7 @@ import IsLoyalty from './IsLoyalty'
 import ShipmentMethod from './ShipmentMethod'
 import IsPay from './IsPay'
 import RegisterMethod from './RegisterMethod'
+import PeriodNew from './PeriodNew'
 
 function Filter() {
   return <Card bg="light" className="shadow-sm">
@@ -51,6 +52,10 @@ function Filter() {
           <Form.Group as={Col} md="2" controlId="register-method" className="mb-3">
             <Form.Label>Метод регистрации</Form.Label>
             <RegisterMethod />
+          </Form.Group>
+          <Form.Group as={Col} md="2" controlId="period-new" className="mb-3">
+            <Form.Label>Период новичка</Form.Label>
+            <PeriodNew />
           </Form.Group>
         </Row>
       </Form>
