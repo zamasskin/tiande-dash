@@ -6,6 +6,7 @@ import Country from './Country'
 import Storages from './Storages'
 import Currencies from './Currencies'
 import AppSelect from './AppSelect'
+import IsLoyalty from './IsLoyalty'
 
 function Filter() {
   return <Card bg="light" className="shadow-sm">
@@ -39,6 +40,12 @@ function Filter() {
           <FormGroup>
           <FormLabel>Приложение</FormLabel>
           <AppSelect/>
+          </FormGroup>
+        </Col>
+        <Col md={2}>
+          <FormGroup>
+          <FormLabel>Заказы лояльности</FormLabel>
+          <IsLoyalty/>
           </FormGroup>
         </Col>
       </Row>

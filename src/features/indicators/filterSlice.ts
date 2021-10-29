@@ -116,4 +116,7 @@ export const selectStorage = (state: AppState) =>
 
 export const selectIsApp = (state: AppState) => state.indicatorsFilter.isApp;
 
+export const selectIsLoyalty = (state: AppState) =>
+  state.indicatorsFilter.loyalty;
+
 export default indicatorsFilterSlice.reducer;
