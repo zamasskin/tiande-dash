@@ -8,7 +8,7 @@ const storagesHandler: NextApiHandler = async (request, response) => {
     "TITLE as text"
   );
 
-  response.json({ esult: "ok", data: storages });
+  response.json({ result: "ok", data: storages });
 };
 
 export default storagesHandler;

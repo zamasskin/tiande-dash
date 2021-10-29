@@ -7,7 +7,7 @@ const currenciesHandler: NextApiHandler = async (request, response) => {
     .where("LID", "ru")
     .select("CURRENCY as value", "FULL_NAME as text");
 
-  response.json({ esult: "ok", data: currencies });
+  response.json({ result: "ok", data: currencies });
 };
 
 export default currenciesHandler;
