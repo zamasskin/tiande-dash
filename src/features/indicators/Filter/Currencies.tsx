@@ -10,6 +10,7 @@ function Currencies() {
    <>
     <CurrenciesBase 
       value={value}
+      size="lg" 
       onChange={(ev: any) => dispatch(setCurrency(ev.target.value)) }
     />
    </>

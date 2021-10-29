@@ -18,7 +18,7 @@ function Currencies(props: CurrenciesProps) {
     .catch((err) => console.log(err));
 
   return (
-    <FormSelect size="lg" {...props}>
+    <FormSelect {...props}>
       {selectOptions.map((selectOption, i) => (
         <option key={i} value={selectOption.value}>
           {selectOption.text}
