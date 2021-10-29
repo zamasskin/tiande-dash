@@ -144,4 +144,7 @@ export const selectIsEs = (state: AppState) => state.indicatorsFilter.isEs;
 export const selectIsBoutique = (state: AppState) =>
   state.indicatorsFilter.isBoutique;
 
+export const selectFilterIndicator = (state: AppState) =>
+  state.indicatorsFilter;
+
 export default indicatorsFilterSlice.reducer;
