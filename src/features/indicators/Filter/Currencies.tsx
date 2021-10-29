@@ -1,24 +1,18 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Form } from "react-bootstrap";
-import { fetchCurrencies } from "../../../models/api/filter";
+import { useAppSelector, useAppDispatch } from '../../../app/hooks'
+import {selectCurrency, setCurrency} from '../filterSlice'
+
+import CurrenciesBase from '../../components/filter/Currencies'
 
 function Currencies() {
-  const none = { value: 0, text: "Все валюты" };
-  const [selectOptions, setOptions] = useState([none]);
-
-  fetchCurrencies()
-    .then((data) => setOptions([none, ...data]))
-    .catch((err) => console.log(err));
-
+  const dispatch = useAppDispatch()
+  const value = useAppSelector(selectCurrency)
   return (
-    <Form.Select size="lg">
-      {selectOptions.map((selectOption, i) => (
-        <option key={i} value={selectOption.value}>
-          {selectOption.text}
-        </option>
-      ))}
-    </Form.Select>
+   <>
+    <CurrenciesBase 
+      value={value}
+      onChange={(ev: any) => dispatch(setCurrency(ev.target.value)) }
+    />
+   </>
   );
 }
 

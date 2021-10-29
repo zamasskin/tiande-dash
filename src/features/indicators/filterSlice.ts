@@ -108,4 +108,7 @@ export const selectPeriodEnd = (state: AppState) =>
 export const selectCountry = (state: AppState) =>
   state.indicatorsFilter.country;
 
+export const selectCurrency = (state: AppState) =>
+  state.indicatorsFilter.currency;
+
 export default indicatorsFilterSlice.reducer;

@@ -1,3 +1,4 @@
 import Country from "./Country";
+import Currencies from "./Currencies";
 
-export { Country };
+export { Country, Currencies };
