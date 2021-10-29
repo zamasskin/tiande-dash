@@ -11,8 +11,11 @@ function Country({useId = 0, allowed = true}) {
   return (
     <>
       <CountryBase 
+        size="lg"
+        useId={useId}
+        allowed = {allowed}
         value={value} 
-        onSelect={(id) =>  dispatch(setCountry(id))}
+        onChange={(ev: any) =>  dispatch(setCountry(ev.target.value))}
       />
     </>
   )
