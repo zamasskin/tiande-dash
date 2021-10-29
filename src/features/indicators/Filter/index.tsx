@@ -4,6 +4,7 @@ import {Card, Row, Col, FormGroup, FormLabel, FormSelect} from 'react-bootstrap'
 import Period from './Period'
 import Country from './Country'
 import Storages from './Storages'
+import Currencies from './Currencies'
 
 function Filter() {
   return <Card bg="light" className="shadow-sm">
@@ -27,7 +28,12 @@ function Filter() {
             <Storages />
           </FormGroup>
         </Col>
-       
+        <Col md={2}>
+          <FormGroup>
+          <FormLabel>Валюты</FormLabel>
+          <Currencies/>
+          </FormGroup>
+        </Col>
       </Row>
     </Card.Body>
   </Card>
