@@ -14,7 +14,8 @@ export interface FilterState {
   pickup: string;
   payOrder: yn;
   registrationMethod: string;
-  periodUserNew: Date[];
+  periodUserNewStart: number;
+  periodUserNewEnd: number;
   isEs: yn;
   isBoutique: yn;
 }
@@ -32,7 +33,8 @@ const initialState: FilterState = {
   pickup: "",
   payOrder: 0,
   registrationMethod: "",
-  periodUserNew: [],
+  periodUserNewStart: 0,
+  periodUserNewEnd: 0,
   isEs: 0,
   isBoutique: 0,
 };
@@ -71,8 +73,11 @@ export const indicatorsFilterSlice = createSlice({
     setRegistrationMethod(state, action: PayloadAction<string>) {
       state.registrationMethod = action.payload;
     },
-    setPeriodUserNew(state, action: PayloadAction<Date[]>) {
-      state.periodUserNew = action.payload;
+    setPeriodUserNewStart(state, action: PayloadAction<number>) {
+      state.periodUserNewStart = action.payload;
+    },
+    setPeriodUserNewEnd(state, action: PayloadAction<number>) {
+      state.periodUserNewEnd = action.payload;
     },
     setIsEs(state, action: PayloadAction<yn>) {
       state.isEs = action.payload;
@@ -92,7 +97,8 @@ export const {
   setPickup,
   setPayOrder,
   setRegistrationMethod,
-  setPeriodUserNew,
+  setPeriodUserNewStart,
+  setPeriodUserNewEnd,
   setIsEs,
   setIsBoutique,
   setPeriodStart,
@@ -126,5 +132,11 @@ export const selectPayOrder = (state: AppState) =>
 
 export const selectRegistrationMethod = (state: AppState) =>
   state.indicatorsFilter.registrationMethod;
+
+export const selectPeriodNewStart = (state: AppState) =>
+  state.indicatorsFilter.periodUserNewStart;
+
+export const selectPeriodNewEnd = (state: AppState) =>
+  state.indicatorsFilter.periodUserNewEnd;
 
 export default indicatorsFilterSlice.reducer;
