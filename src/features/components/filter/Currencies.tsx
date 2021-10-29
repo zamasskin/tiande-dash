@@ -1,6 +1,4 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import  { useState } from "react";
 import {FormSelect, FormSelectProps} from 'react-bootstrap'
 
 import { fetchCurrencies } from "../../../models/api/filter";
