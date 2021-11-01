@@ -17,6 +17,7 @@ function ComparativeAnalysis() {
 
 
   useEffect(() => {
+    console.log(filter)
     setData([
       {price: '0 руб', percent: '5%'},
       {price: '1 руб', percent: '6%'},
