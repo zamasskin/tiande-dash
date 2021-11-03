@@ -6,9 +6,8 @@ const comparativeAnalysisHandler: NextApiHandler = async (
   response
 ) => {
   const { filter } = request.body;
-  //const result = await comparativeAnalysis(filter);
-  // /api/indicators/comparative-analysis
-  response.json({ result: "ok", data: [] });
+  const result = await comparativeAnalysis(filter);
+  response.json({ result: "ok", data: result });
 };
 
 export default comparativeAnalysisHandler;

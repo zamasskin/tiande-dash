@@ -42,9 +42,14 @@ export function preparePeriod(
   end: number
 ) {
   if (start > 0 && end > 0) {
+    const dateStart = moment(start),
+      dateEnd = moment(end);
+    dateStart.set({ hour: 0, minute: 0, second: 0 });
+    dateEnd.set({ hour: 23, minute: 59, second: 59 });
+
     return qb
-      .where("o.DATE_INSERT", ">=", new Date(start))
-      .where("o.DATE_INSERT", "<=", new Date(end));
+      .where("o.DATE_INSERT", ">=", dateStart.toDate())
+      .where("o.DATE_INSERT", "<=", dateEnd.toDate());
   }
   return qb;
 }

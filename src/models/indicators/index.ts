@@ -1,20 +1,92 @@
 import { Knex } from "knex";
+import moment from "moment";
 import { FilterState } from "../../features/indicators/filterSlice";
 import { qb as knex } from "../../settings/api";
 import { prepareFilter } from "./filter";
 
-export async function comparativeAnalysis(filter: FilterState) {
+export function comparativeAnalysisQuery(filter: FilterState) {
   let query = indicatorsQuery();
   query = currencyRateJoin(query);
   query = prepareFilter(query, filter);
-  query.select("");
+  query = query.select(
+    knex.raw(
+      "round(sum(if(o.CURRENCY='RUB', o.price, o.price / k.RATE_CNT * k.RATE)),2) AS 'sales_sum'"
+    ),
+    knex.raw(
+      "round(round(sum(if(o.CURRENCY='RUB', o.price, o.price / k.RATE_CNT * k.RATE)),2) / count(o.ID),2) AS 'average_check'"
+    )
+  );
+  return query;
+}
+
+export function addMonth(time: number, month: number = 1) {
+  return moment(time).add(month, "month").toDate().getTime();
+}
+
+export function addYear(time: number, year: number = 1) {
+  return moment(time).add(year, "year").toDate().getTime();
+}
+
+export function numberFormat(
+  price: number,
+  decimals = 2,
+  decPoint = ".",
+  thousandsSep = " ",
+  hideZero = false
+) {
+  const reqExp = new RegExp("\\B(?=(?:\\d{3})+(?!\\d))", "g");
+  let [left, right = ""] = price.toFixed(decimals).toString().split(".");
+  if (decimals > 0 && hideZero) {
+    right = right.replace(/[0]+$/, "");
+  }
+  left = left.replace(reqExp, thousandsSep);
+  return (right.length > 0 ? left + decPoint + right : left).toString();
+}
+
+export function numberFormatRub(
+  price: number,
+  decimals = 2,
+  decPoint = ".",
+  thousandsSep = " ",
+  hideZero = false
+) {
+  return (
+    numberFormat(price, decimals, decPoint, thousandsSep, hideZero) + " руб"
+  );
+}
+
+export async function comparativeAnalysis(filter: FilterState) {
+  const filterMonthAgo = { ...filter },
+    filterYearAgo = { ...filter };
+  filterMonthAgo.periodStart = addMonth(filterMonthAgo.periodStart, -1);
+  filterMonthAgo.periodEnd = addMonth(filterMonthAgo.periodEnd, -1);
+  filterYearAgo.periodStart = addYear(filterYearAgo.periodStart, -1);
+  filterYearAgo.periodEnd = addYear(filterYearAgo.periodEnd, -1);
+
+  const [p1, p2, p3] = await Promise.all([
+    comparativeAnalysisQuery(filter).first(),
+    comparativeAnalysisQuery(filterMonthAgo).first(),
+    comparativeAnalysisQuery(filterYearAgo).first(),
+  ]);
+
+  const salesFirstMonth = p1.sales_sum - p2.sales_sum;
+  const salesFirstYear = p1.sales_sum - p3.sales_sum;
+  const averageCheckFirstMonth = p1.average_check - p2.average_check;
+  const averageCheckFirstYear = p1.average_check - p3.average_check;
+
+  return [
+    { price: numberFormatRub(salesFirstMonth), percent: "5%" },
+    { price: numberFormatRub(salesFirstYear), percent: "6%" },
+    { price: numberFormatRub(averageCheckFirstMonth), percent: "7%" },
+    { price: numberFormatRub(averageCheckFirstYear), percent: "8%" },
+  ];
 }
 
 export function indicatorsQuery() {
   return knex({ o: "b_sale_order" })
     .where("o.CANCELED", "N")
-    .whereNotNull("DELIVERY_ID")
-    .where("DELIVERY_ID", "<>", "");
+    .whereNotNull("o.DELIVERY_ID")
+    .where("o.DELIVERY_ID", "<>", "");
 }
 
 export function currencyRateJoin(qb: Knex.QueryBuilder) {

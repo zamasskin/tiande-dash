@@ -5,6 +5,7 @@ import { useAppSelector } from '../../../app/hooks';
 import { selectPeriodEnd, selectPeriodStart, selectFilterIndicator } from '../filterSlice';
 import {dateFormat} from '../../../constants'
 import moment from 'moment';
+import { fetchComparativeAnalysis } from '../../../models/api/indicators';
 
 function ComparativeAnalysis() {
   const filter = useAppSelector(selectFilterIndicator)
@@ -17,13 +18,9 @@ function ComparativeAnalysis() {
 
 
   useEffect(() => {
-    console.log(filter)
-    setData([
-      {price: '0 руб', percent: '5%'},
-      {price: '1 руб', percent: '6%'},
-      {price: '2 руб', percent: '7%'},
-      {price: '3 руб', percent: '8%'},
-    ])
+    (async () => {
+      setData(await fetchComparativeAnalysis(filter))
+    })();
   }, [filter])
   return (
     <>
