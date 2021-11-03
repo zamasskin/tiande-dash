@@ -147,9 +147,10 @@ export function prepareEs(qb: Knex.QueryBuilder, isEs: yn): Knex.QueryBuilder {
 
 export function prepareBoutique(qb: Knex.QueryBuilder, isBoutique: yn) {
   if (isBoutique > 0) {
-    return joinIsBoutiqueProps(qb).where(
-      "op8.VALUE",
-      isBoutique === 1 ? "Y" : "N"
+    return joinIsBoutiqueProps(qb).where((qb) =>
+      qb
+        .where("op8.VALUE", isBoutique === 1 ? "Y" : "N")
+        .orWhereNull("op8.VALUE")
     );
   }
   return qb;

@@ -28,13 +28,25 @@ export function addYear(time: number, year: number = 1) {
   return moment(time).add(year, "year").toDate().getTime();
 }
 
+export function getFilterMonthAgo(filter: FilterState) {
+  return {
+    ...filter,
+    periodStart: addMonth(filter.periodStart, -1),
+    periodEnd: addMonth(filter.periodEnd, -1),
+  };
+}
+
+export function getFilterYearAgo(filter: FilterState) {
+  return {
+    ...filter,
+    periodStart: addYear(filter.periodStart, -1),
+    periodEnd: addYear(filter.periodEnd, -1),
+  };
+}
+
 export async function comparativeAnalysis(filter: FilterState) {
-  const filterMonthAgo = { ...filter },
-    filterYearAgo = { ...filter };
-  filterMonthAgo.periodStart = addMonth(filterMonthAgo.periodStart, -1);
-  filterMonthAgo.periodEnd = addMonth(filterMonthAgo.periodEnd, -1);
-  filterYearAgo.periodStart = addYear(filterYearAgo.periodStart, -1);
-  filterYearAgo.periodEnd = addYear(filterYearAgo.periodEnd, -1);
+  const filterMonthAgo = getFilterMonthAgo(filter),
+    filterYearAgo = getFilterYearAgo(filter);
 
   const [p1, p2, p3] = await Promise.all([
     comparativeAnalysisQuery(filter).first(),
