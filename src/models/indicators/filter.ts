@@ -1,7 +1,7 @@
 import { Knex } from "knex";
 import { qb as knex } from "../../settings/api";
 import moment from "moment";
-import { from, map, of } from "rxjs";
+import { from, map, Observable, of } from "rxjs";
 import {
   joinBitCountry,
   joinIsAppProps,
@@ -16,22 +16,24 @@ import { FilterState } from "../../features/indicators/filterSlice";
 
 export type yn = 0 | 1 | 2;
 
-export function prepareFilter(knex: Knex.QueryBuilder, filter: FilterState) {
-  return of(knex).pipe(
-    map((knex) => preparePeriod(knex, filter.periodStart, filter.periodEnd)),
-    map((knex) => prepareCountry(knex, filter.country)),
-    map((knex) => prepareCurrency(knex, filter.currency)),
-    map((knex) => prepareIsApp(knex, filter.isApp)),
-    map((knex) => prepareLoyalty(knex, filter.loyalty)),
-    map((knex) => preparePickup(knex, filter.pickup)),
-    map((knex) => preparePayOrder(knex, filter.payOrder)),
-    map((knex) => prepareRegistrationMethod(knex, filter.registrationMethod)),
-    map((knex) =>
-      prepareUserNew(knex, filter.periodUserNewStart, filter.periodUserNewEnd)
-    ),
-    map((knex) => prepareEs(knex, filter.isEs)),
-    map((knex) => prepareBoutique(knex, filter.isBoutique))
+export function prepareFilter(query: Knex.QueryBuilder, filter: FilterState) {
+  query = preparePeriod(query, filter.periodStart, filter.periodEnd);
+  query = prepareCountry(query, filter.country);
+  query = prepareStorage(query, filter.storage);
+  query = prepareCurrency(query, filter.currency);
+  query = prepareIsApp(query, filter.isApp);
+  query = prepareLoyalty(query, filter.loyalty);
+  query = preparePickup(query, filter.pickup);
+  query = preparePayOrder(query, filter.payOrder);
+  query = prepareRegistrationMethod(query, filter.registrationMethod);
+  query = prepareUserNew(
+    query,
+    filter.periodUserNewStart,
+    filter.periodUserNewEnd
   );
+  query = prepareEs(query, filter.isEs);
+  query = prepareBoutique(query, filter.isBoutique);
+  return query;
 }
 
 export function preparePeriod(
@@ -121,7 +123,7 @@ export function prepareUserNew(
   qb: Knex.QueryBuilder,
   start: number,
   end: number
-) {
+): Knex.QueryBuilder {
   if (start > 0 && end > 0) {
     const endDate = moment(end).add(1, "days").toDate();
     return joinUser(qb)
@@ -131,7 +133,7 @@ export function prepareUserNew(
   return qb;
 }
 
-export function prepareEs(qb: Knex.QueryBuilder, isEs: yn) {
+export function prepareEs(qb: Knex.QueryBuilder, isEs: yn): Knex.QueryBuilder {
   if (isEs > 0) {
     return joinBitCountry(qb).where("c.UF_IS_EU", Boolean(isEs === 1));
   }

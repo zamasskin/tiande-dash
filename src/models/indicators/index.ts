@@ -1,5 +1,14 @@
 import { Knex } from "knex";
+import { FilterState } from "../../features/indicators/filterSlice";
 import { qb as knex } from "../../settings/api";
+import { prepareFilter } from "./filter";
+
+export async function comparativeAnalysis(filter: FilterState) {
+  let query = indicatorsQuery();
+  query = currencyRateJoin(query);
+  query = prepareFilter(query, filter);
+  query.select("");
+}
 
 export function indicatorsQuery() {
   return knex({ o: "b_sale_order" })
@@ -35,13 +44,19 @@ export function joinLoyaltyProps(qb: Knex.QueryBuilder) {
 }
 
 export function joinLocation(qb: Knex.QueryBuilder) {
-  joinLocationProps(qb);
-  return qb.join({ l: "b_sale_location" }, "l.ID", "op.VALUE");
+  return joinLocationProps(qb).join(
+    { l: "b_sale_location" },
+    "l.ID",
+    "op.VALUE"
+  );
 }
 
 export function joinBitCountry(qb: Knex.QueryBuilder) {
-  joinLocation(qb);
-  return qb.join({ c: "bit_country" }, "c.UF_BITRIX_COUNTRY", "l.COUNTRY_ID");
+  return joinLocation(qb).join(
+    { c: "bit_country" },
+    "c.UF_BITRIX_COUNTRY",
+    "l.COUNTRY_ID"
+  );
 }
 
 export function joinIsAppProps(qb: Knex.QueryBuilder) {
@@ -67,6 +82,5 @@ export function joinUser(qb: Knex.QueryBuilder) {
 }
 
 export function joinUserProperties(qb: Knex.QueryBuilder) {
-  joinUser(qb);
-  return qb.leftJoin({ ut: "b_uts_user" }, "ut.VALUE_ID", "u.ID");
+  return joinUser(qb).leftJoin({ ut: "b_uts_user" }, "ut.VALUE_ID", "u.ID");
 }
