@@ -2,6 +2,7 @@ import { Knex } from "knex";
 import moment from "moment";
 import { FilterState } from "../../features/indicators/filterSlice";
 import { qb as knex } from "../../settings/api";
+import { numberFormatRub } from "../number";
 import { prepareFilter } from "./filter";
 
 export function comparativeAnalysisQuery(filter: FilterState) {
@@ -25,34 +26,6 @@ export function addMonth(time: number, month: number = 1) {
 
 export function addYear(time: number, year: number = 1) {
   return moment(time).add(year, "year").toDate().getTime();
-}
-
-export function numberFormat(
-  price: number,
-  decimals = 2,
-  decPoint = ".",
-  thousandsSep = " ",
-  hideZero = false
-) {
-  const reqExp = new RegExp("\\B(?=(?:\\d{3})+(?!\\d))", "g");
-  let [left, right = ""] = price.toFixed(decimals).toString().split(".");
-  if (decimals > 0 && hideZero) {
-    right = right.replace(/[0]+$/, "");
-  }
-  left = left.replace(reqExp, thousandsSep);
-  return (right.length > 0 ? left + decPoint + right : left).toString();
-}
-
-export function numberFormatRub(
-  price: number,
-  decimals = 2,
-  decPoint = ".",
-  thousandsSep = " ",
-  hideZero = false
-) {
-  return (
-    numberFormat(price, decimals, decPoint, thousandsSep, hideZero) + " руб"
-  );
 }
 
 export async function comparativeAnalysis(filter: FilterState) {
