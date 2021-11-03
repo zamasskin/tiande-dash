@@ -74,11 +74,26 @@ export async function comparativeAnalysis(filter: FilterState) {
   const averageCheckFirstMonth = p1.average_check - p2.average_check;
   const averageCheckFirstYear = p1.average_check - p3.average_check;
 
+  const callPercent = (sum1: number, sum2: number) =>
+    Number((sum1 / sum2) * 100).toFixed(2) + "%";
+
   return [
-    { price: numberFormatRub(salesFirstMonth), percent: "5%" },
-    { price: numberFormatRub(salesFirstYear), percent: "6%" },
-    { price: numberFormatRub(averageCheckFirstMonth), percent: "7%" },
-    { price: numberFormatRub(averageCheckFirstYear), percent: "8%" },
+    {
+      price: numberFormatRub(salesFirstMonth),
+      percent: callPercent(salesFirstMonth, p2.sales_sum),
+    },
+    {
+      price: numberFormatRub(salesFirstYear),
+      percent: callPercent(salesFirstYear, p3.sales_sum),
+    },
+    {
+      price: numberFormatRub(averageCheckFirstMonth),
+      percent: callPercent(averageCheckFirstMonth, p2.average_check),
+    },
+    {
+      price: numberFormatRub(averageCheckFirstYear),
+      percent: callPercent(averageCheckFirstYear, p3.average_check),
+    },
   ];
 }
 
