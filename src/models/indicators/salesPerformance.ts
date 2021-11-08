@@ -5,7 +5,12 @@ import { qb as knex } from "../../settings/api";
 import { indicatorsQuery, currencyRateJoin, joinUser } from ".";
 import { FilterState } from "../../features/indicators/filterSlice";
 import { prepareFilter } from "./filter";
-import { numberFormatBall, numberFormatDe, numberFormatRub } from "../number";
+import {
+  numberFormat,
+  numberFormatBall,
+  numberFormatDe,
+  numberFormatRub,
+} from "../number";
 import { SalesPerformanceDefault } from "./initData";
 import { indicators } from "../../features/functions/date";
 
@@ -95,15 +100,19 @@ export async function SalesPerformance(filter: FilterState) {
       averageCheck: numberFormatRub(result.salesSum / result.count),
       numberOfOrders: `${result.count} шт`,
       numberOfClientsNew: result.numberOfClientsNew,
-      shareOfNewbies: result.numberOfClientsNew / result.saleUsersCount,
+      shareOfNewbies: numberFormat(
+        result.numberOfClientsNew / result.saleUsersCount
+      ),
       shareOfNewbiesBySale: numberFormatRub(
         result.salesSumNew / result.salesSum
       ),
-      shareOfPickup: `${(result.countPickup / result.count) * 100} %`,
+      shareOfPickup: `${numberFormat(
+        (result.countPickup / result.count) * 100
+      )} %`,
       balls: numberFormatBall(result.balls),
       loyalty: numberFormatDe(result.loyalty),
-      numberOfClients: result.saleUsersCount,
-      averageCheckBalls: result.balls / result.count,
+      numberOfClients: numberFormat(result.saleUsersCount),
+      averageCheckBalls: numberFormat(result.balls / result.count),
       numberOfOrdersLoyalty: result.numberOfOrdersLoyalty,
     };
   }
