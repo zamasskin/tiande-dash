@@ -1,4 +1,5 @@
 import { Knex } from "knex";
+import util from "util";
 
 import { qb as knex } from "../../settings/api";
 import { indicatorsQuery, currencyRateJoin, joinUser } from ".";
@@ -17,7 +18,7 @@ export function loyaltyTransferQuery() {
 
 export function loyaltyPriceQuery() {
   return knex("b_sale_order_props_value")
-    .select("ID")
+    .select("VALUE")
     .where("ORDER_PROPS_ID", 125);
 }
 
@@ -30,13 +31,24 @@ export function pickupQuery() {
 
 export function ballsQuery() {
   return knex("b_sale_order_props_value")
-    .select("ID")
+    .select("VALUE")
     .where("ORDER_PROPS_ID", 39);
 }
 
 export function SalesPerformanceQuery(filter: FilterState) {
   const selectPropsQuery = (query: () => Knex.QueryBuilder) =>
     query().where("ORDER_ID", knex.raw("o.ID"));
+
+  const selectCount = (query: () => Knex.QueryBuilder, alias: string) =>
+    knex.raw(
+      util.format("COUNT((%s)) as %s", selectPropsQuery(query).toQuery(), alias)
+    );
+
+  const selectSum = (query: () => Knex.QueryBuilder, alias: string) =>
+    knex.raw(
+      util.format("SUM((%s)) as %s", selectPropsQuery(query).toQuery(), alias)
+    );
+
   let query = indicatorsQuery();
   query = currencyRateJoin(query);
   query = prepareFilter(query, filter);
@@ -53,9 +65,7 @@ export function SalesPerformanceQuery(filter: FilterState) {
     //count
     knex.raw("count(o.ID) as 'count'"),
     //saleUsersCount
-    knex
-      .count(selectPropsQuery(loyaltyTransferQuery))
-      .as("numberOfOrdersLoyalty"),
+    selectCount(loyaltyTransferQuery, "numberOfOrdersLoyalty"),
     //saleUsersCount
     knex.raw("COUNT(distinct o.USER_ID) as saleUsersCount"),
     //numberOfClientsNew
@@ -63,12 +73,14 @@ export function SalesPerformanceQuery(filter: FilterState) {
       "COUNT(DISTINCT IF(u.DATE_REGISTER >= @start_date AND u.DATE_REGISTER <= @end_date, u.ID, 0)) - SUM(DISTINCT IF(u.DATE_REGISTER >= @start_date AND u.DATE_REGISTER <= @end_date, 0, 1)) as numberOfClientsNew"
     ),
     //countPickup
-    knex.count(selectPropsQuery(pickupQuery)).as("countPickup"),
+    selectCount(pickupQuery, "countPickup"),
     //balls
-    knex.sum(selectPropsQuery(ballsQuery)).as("balls"),
+    selectSum(ballsQuery, "balls"),
     //loyalty
-    knex.sum(selectPropsQuery(loyaltyPriceQuery)).as("loyalty")
+    selectSum(loyaltyPriceQuery, "loyalty")
   );
+
+  console.log("----", query.toQuery());
   return query;
 }
 
