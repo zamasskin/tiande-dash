@@ -34,7 +34,7 @@ export function Performance({name, filter}) {
   const period =  `${moment(periodStart).format(dateFormat)} - ${moment(periodEnd).format(dateFormat)}`
   const days = indicators.diff(periodStart, periodStart)
 
-  fetchSalesPerformance(filter).then(result => console.log(setData)).catch(err => console.log(err))
+  fetchSalesPerformance(filter).then(result => setData(result)).catch(err => console.log(err))
   
   return (
     <Card className="shadow-sm">
