@@ -33,3 +33,8 @@ export function getFilterYearAgo(filter: FilterState) {
     periodEnd: addYear(filter.periodEnd, -1),
   };
 }
+
+export const indicators = {
+  diff: (start: number, end: number) =>
+    moment(end).diff(moment(start), "days") + 1,
+};

@@ -5,10 +5,9 @@ import { Col, Card, Table} from 'react-bootstrap'
 import { useAppSelector } from '../../app/hooks';
 import { selectFilterIndicator } from './filterSlice';
 import { dateFormat } from '../../constants';
-import { indicators } from '../../models/date';
 import { fetchSalesPerformance } from '../../models/api/indicators';
 import { SalesPerformanceDefault } from '../../models/indicators/initData';
-import { getFilterMonthAgo, getFilterYearAgo } from '../functions/date';
+import { getFilterMonthAgo, getFilterYearAgo, indicators } from '../functions/date';
 
 
 function SalesPerformance() {

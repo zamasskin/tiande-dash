@@ -4,9 +4,9 @@ import { qb as knex } from "../../settings/api";
 import { indicatorsQuery, currencyRateJoin, joinUser } from ".";
 import { FilterState } from "../../features/indicators/filterSlice";
 import { prepareFilter } from "./filter";
-import { indicators } from "../date";
 import { numberFormatBall, numberFormatDe, numberFormatRub } from "../number";
 import { SalesPerformanceDefault } from "./initData";
+import { indicators } from "../../features/functions/date";
 
 export function loyaltyTransferQuery() {
   return knex("b_sale_order_props_value")
