@@ -4,6 +4,8 @@ import { Col, Card, Table} from 'react-bootstrap'
 import { useAppSelector } from '../../app/hooks';
 import { selectFilterIndicator } from './filterSlice';
 import { getFilterMonthAgo, getFilterYearAgo } from "../../models/indicators/filter"
+import moment from 'moment';
+import { dateFormat } from '../../constants';
 
 
 function SalesPerformance() {
@@ -44,6 +46,8 @@ const defaultData = {
 
 export function Performance({name, filter}) {
   const [data, setData] =  useState(defaultData);
+  const {periodStart, periodEnd} = filter;
+  const period =  `${moment(periodStart).format(dateFormat)} - ${moment(periodEnd).format(dateFormat)}`
   return (
     <Card className="shadow-sm">
       <Card.Body>
@@ -58,6 +62,10 @@ export function Performance({name, filter}) {
               </tr>
             </thead>
             <tbody>
+            <tr>
+                <td>Период:</td>
+                <td>{period}</td>
+              </tr>
               <tr>
                 <td>Количество дней:</td>
                 <td>{data.days}</td>
