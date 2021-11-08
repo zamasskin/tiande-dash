@@ -32,7 +32,7 @@ export function Performance({name, filter}) {
   const [data, setData] =  useState(SalesPerformanceDefault);
   const {periodStart, periodEnd} = filter;
   const period =  `${moment(periodStart).format(dateFormat)} - ${moment(periodEnd).format(dateFormat)}`
-  const days = indicators.diff(periodStart, periodStart)
+  const days = indicators.diff(periodStart, periodEnd)
 
   fetchSalesPerformance(filter).then(result => setData(result)).catch(err => console.log(err))
   
