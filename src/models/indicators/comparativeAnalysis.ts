@@ -1,10 +1,13 @@
-import { getFilterMonthAgo, getFilterYearAgo } from "./filter";
 import { indicatorsQuery } from "./index";
 import { FilterState } from "../../features/indicators/filterSlice";
 import { qb as knex } from "../../settings/api";
 import { numberFormatRub } from "../number";
 import { currencyRateJoin } from "./index";
 import { prepareFilter } from "./filter";
+import {
+  getFilterMonthAgo,
+  getFilterYearAgo,
+} from "../../features/functions/date";
 
 export function comparativeAnalysisQuery(filter: FilterState) {
   let query = indicatorsQuery();
