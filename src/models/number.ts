@@ -1,3 +1,5 @@
+import { toNumber } from "../features/functions/number";
+
 export function numberFormat(
   price: number,
   decimals = 2,
@@ -5,6 +7,7 @@ export function numberFormat(
   thousandsSep = " ",
   hideZero = false
 ) {
+  price = toNumber(price);
   const reqExp = new RegExp("\\B(?=(?:\\d{3})+(?!\\d))", "g");
   let [left, right = ""] = price.toFixed(decimals).toString().split(".");
   if (decimals > 0 && hideZero) {
