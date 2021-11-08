@@ -7,6 +7,7 @@ import { selectFilterIndicator } from './filterSlice';
 import { getFilterMonthAgo, getFilterYearAgo } from "../../models/indicators/filter"
 import { dateFormat } from '../../constants';
 import { indicators } from '../../models/date';
+import { SalesPerformanceDefault } from '../../models/indicators';
 
 
 function SalesPerformance() {
@@ -26,26 +27,9 @@ function SalesPerformance() {
   )
 }
 
-const defaultData = {
-  salesSum: '0 руб',
-  sumDays: '0 руб',
-  salesSumNew: '0 руб',
-  averageCheck: '0 руб',
-  numberOfOrders: '0 шт',
-  numberOfClientsNew: '0',
-  shareOfNewbies: '0 %',
-  shareOfNewbiesBySale: '0 %',
-  shareOfPickup: '0 %',
-  balls: '0 Б',
-  loyalty: '0 De',
-  numberOfClients: '0',
-  averageCheckBalls: '0',
-  numberOfOrdersLoyalty: '0',
-};
-
 
 export function Performance({name, filter}) {
-  const [data, setData] =  useState(defaultData);
+  const [data, setData] =  useState(SalesPerformanceDefault);
   const {periodStart, periodEnd} = filter;
   const period =  `${moment(periodStart).format(dateFormat)} - ${moment(periodEnd).format(dateFormat)}`
   const days = indicators.diff(periodStart, periodStart)

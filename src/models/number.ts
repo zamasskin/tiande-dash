@@ -25,3 +25,25 @@ export function numberFormatRub(
     numberFormat(price, decimals, decPoint, thousandsSep, hideZero) + " руб"
   );
 }
+
+export function numberFormatBall(
+  price: number,
+  decimals = 2,
+  decPoint = ".",
+  thousandsSep = " ",
+  hideZero = false
+) {
+  return numberFormat(price, decimals, decPoint, thousandsSep, hideZero) + " Б";
+}
+
+export function numberFormatDe(
+  price: number,
+  decimals = 2,
+  decPoint = ".",
+  thousandsSep = " ",
+  hideZero = false
+) {
+  return (
+    numberFormat(price, decimals, decPoint, thousandsSep, hideZero) + " De"
+  );
+}
