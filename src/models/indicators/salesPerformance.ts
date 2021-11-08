@@ -79,8 +79,6 @@ export function SalesPerformanceQuery(filter: FilterState) {
     //loyalty
     selectSum(loyaltyPriceQuery, "loyalty")
   );
-
-  console.log("----", query.toQuery());
   return query;
 }
 
