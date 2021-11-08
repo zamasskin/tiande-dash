@@ -12,7 +12,7 @@ export async function fetchComparativeAnalysis(filter: FilterState) {
   return prepareResponse(response);
 }
 
-export async function SalesPerformanceQuery(filter: FilterState) {
+export async function fetchSalesPerformance(filter: FilterState) {
   const response = await axios.post<Response>(
     "/api/indicators/sales-performance",
     {
