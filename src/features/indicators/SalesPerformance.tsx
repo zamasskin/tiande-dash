@@ -6,7 +6,7 @@ import { useAppSelector } from '../../app/hooks';
 import { selectFilterIndicator } from './filterSlice';
 import { getFilterMonthAgo, getFilterYearAgo } from "../../models/indicators/filter"
 import { dateFormat } from '../../constants';
-import { indicatorsDayDiff } from '../../models/date';
+import { indicators } from '../../models/date';
 
 
 function SalesPerformance() {
@@ -48,7 +48,7 @@ export function Performance({name, filter}) {
   const [data, setData] =  useState(defaultData);
   const {periodStart, periodEnd} = filter;
   const period =  `${moment(periodStart).format(dateFormat)} - ${moment(periodEnd).format(dateFormat)}`
-  const days = indicatorsDayDiff(periodStart, periodStart)
+  const days = indicators.diff(periodStart, periodStart)
   return (
     <Card className="shadow-sm">
       <Card.Body>
