@@ -1,11 +1,12 @@
+import moment from 'moment';
 import { useState } from 'react';
 import { Col, Card, Table} from 'react-bootstrap'
 
 import { useAppSelector } from '../../app/hooks';
 import { selectFilterIndicator } from './filterSlice';
 import { getFilterMonthAgo, getFilterYearAgo } from "../../models/indicators/filter"
-import moment from 'moment';
 import { dateFormat } from '../../constants';
+import { indicatorsDayDiff } from '../../models/date';
 
 
 function SalesPerformance() {
@@ -26,7 +27,6 @@ function SalesPerformance() {
 }
 
 const defaultData = {
-  days: '0 дней',
   salesSum: '0 руб',
   sumDays: '0 руб',
   salesSumNew: '0 руб',
@@ -48,6 +48,7 @@ export function Performance({name, filter}) {
   const [data, setData] =  useState(defaultData);
   const {periodStart, periodEnd} = filter;
   const period =  `${moment(periodStart).format(dateFormat)} - ${moment(periodEnd).format(dateFormat)}`
+  const days = indicatorsDayDiff(periodStart, periodStart)
   return (
     <Card className="shadow-sm">
       <Card.Body>
@@ -68,7 +69,7 @@ export function Performance({name, filter}) {
               </tr>
               <tr>
                 <td>Количество дней:</td>
-                <td>{data.days}</td>
+                <td>{days}</td>
               </tr>
               <tr>
                 <td>Сумма продаж:</td>
