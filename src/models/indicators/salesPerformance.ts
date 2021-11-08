@@ -13,6 +13,7 @@ import {
 } from "../number";
 import { SalesPerformanceDefault } from "./initData";
 import { indicators } from "../../features/functions/date";
+import moment from "moment";
 
 export function loyaltyTransferQuery() {
   return knex("b_sale_order_props_value")
@@ -41,6 +42,9 @@ export function ballsQuery() {
 }
 
 export function SalesPerformanceQuery(filter: FilterState) {
+  const { periodStart, periodEnd } = filter;
+  const dateStart = moment(periodStart).format("YYYY-MM-DD HH:mm:ss");
+  const dateEnd = moment(periodEnd).format("YYYY-MM-DD HH:mm:ss");
   const selectPropsQuery = (query: () => Knex.QueryBuilder) =>
     query().where("ORDER_ID", knex.raw("o.ID"));
 
@@ -65,7 +69,7 @@ export function SalesPerformanceQuery(filter: FilterState) {
     ),
     //salesSumNew
     knex.raw(
-      "round(sum(IF(u.DATE_REGISTER >= @start_date AND u.DATE_REGISTER <= @end_date, if(o.CURRENCY='RUB', o.price, o.price / k.RATE_CNT * k.RATE),0)),2) as salesSumNew"
+      `round(sum(IF(u.DATE_REGISTER >= '${dateStart}' AND u.DATE_REGISTER <= '${dateEnd}', if(o.CURRENCY='RUB', o.price, o.price / k.RATE_CNT * k.RATE),0)),2) as salesSumNew`
     ),
     //count
     knex.raw("count(o.ID) as 'count'"),
@@ -75,7 +79,7 @@ export function SalesPerformanceQuery(filter: FilterState) {
     knex.raw("COUNT(distinct o.USER_ID) as saleUsersCount"),
     //numberOfClientsNew
     knex.raw(
-      "COUNT(DISTINCT IF(u.DATE_REGISTER >= @start_date AND u.DATE_REGISTER <= @end_date, u.ID, 0)) - SUM(DISTINCT IF(u.DATE_REGISTER >= @start_date AND u.DATE_REGISTER <= @end_date, 0, 1)) as numberOfClientsNew"
+      `COUNT(DISTINCT IF(u.DATE_REGISTER >= '${dateStart}' AND u.DATE_REGISTER <= '${dateEnd}', u.ID, 0)) - SUM(DISTINCT IF(u.DATE_REGISTER >= '${dateStart}' AND u.DATE_REGISTER <= '${dateEnd}', 0, 1)) as numberOfClientsNew`
     ),
     //countPickup
     selectCount(pickupQuery, "countPickup"),
