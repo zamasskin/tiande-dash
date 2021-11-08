@@ -4,6 +4,9 @@ import moment from "moment";
 import { FilterState } from "../../features/indicators/filterSlice";
 import { qb as knex } from "../../settings/api";
 
+export * from "./comparativeAnalysis";
+export * from "./salesPerformance";
+
 export function indicatorsQuery() {
   return knex({ o: "b_sale_order" })
     .where("o.CANCELED", "N")
