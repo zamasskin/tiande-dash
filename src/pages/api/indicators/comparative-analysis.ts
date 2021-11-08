@@ -1,5 +1,5 @@
 import type { NextApiHandler } from "next";
-import { comparativeAnalysis } from "../../../models/indicators/comparativeAnalysis";
+import { comparativeAnalysis } from "../../../models/indicators";
 
 const comparativeAnalysisHandler: NextApiHandler = async (
   request,
