@@ -7,7 +7,8 @@ import { selectFilterIndicator } from './filterSlice';
 import { getFilterMonthAgo, getFilterYearAgo } from "../../models/indicators/filter"
 import { dateFormat } from '../../constants';
 import { indicators } from '../../models/date';
-import { SalesPerformanceDefault } from '../../models/indicators';
+import { fetchSalesPerformance } from '../../models/api/indicators';
+import { SalesPerformanceDefault } from '../../models/indicators/initData';
 
 
 function SalesPerformance() {
@@ -33,6 +34,9 @@ export function Performance({name, filter}) {
   const {periodStart, periodEnd} = filter;
   const period =  `${moment(periodStart).format(dateFormat)} - ${moment(periodEnd).format(dateFormat)}`
   const days = indicators.diff(periodStart, periodStart)
+
+  fetchSalesPerformance(filter).then(result => console.log(setData)).catch(err => console.log(err))
+  
   return (
     <Card className="shadow-sm">
       <Card.Body>

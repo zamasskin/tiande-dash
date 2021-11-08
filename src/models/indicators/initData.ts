@@ -1,0 +1,16 @@
+export const SalesPerformanceDefault = {
+  salesSum: "0 руб",
+  sumDays: "0 руб",
+  salesSumNew: "0 руб",
+  averageCheck: "0 руб",
+  numberOfOrders: "0 шт",
+  numberOfClientsNew: "0",
+  shareOfNewbies: "0 %",
+  shareOfNewbiesBySale: "0 %",
+  shareOfPickup: "0 %",
+  balls: "0 Б",
+  loyalty: "0 De",
+  numberOfClients: "0",
+  averageCheckBalls: "0",
+  numberOfOrdersLoyalty: "0",
+};
