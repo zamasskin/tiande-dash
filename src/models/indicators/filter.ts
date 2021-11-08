@@ -13,8 +13,25 @@ import {
   joinUserProperties,
 } from "./index";
 import { FilterState } from "../../features/indicators/filterSlice";
+import { addMonth, addYear } from "../date";
 
 export type yn = 0 | 1 | 2;
+
+export function getFilterMonthAgo(filter: FilterState) {
+  return {
+    ...filter,
+    periodStart: addMonth(filter.periodStart, -1),
+    periodEnd: addMonth(filter.periodEnd, -1),
+  };
+}
+
+export function getFilterYearAgo(filter: FilterState) {
+  return {
+    ...filter,
+    periodStart: addYear(filter.periodStart, -1),
+    periodEnd: addYear(filter.periodEnd, -1),
+  };
+}
 
 export function prepareFilter(query: Knex.QueryBuilder, filter: FilterState) {
   query = preparePeriod(query, filter.periodStart, filter.periodEnd);

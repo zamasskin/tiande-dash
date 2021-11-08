@@ -3,23 +3,6 @@ import moment from "moment";
 
 import { FilterState } from "../../features/indicators/filterSlice";
 import { qb as knex } from "../../settings/api";
-import { addMonth, addYear } from "../date";
-
-export function getFilterMonthAgo(filter: FilterState) {
-  return {
-    ...filter,
-    periodStart: addMonth(filter.periodStart, -1),
-    periodEnd: addMonth(filter.periodEnd, -1),
-  };
-}
-
-export function getFilterYearAgo(filter: FilterState) {
-  return {
-    ...filter,
-    periodStart: addYear(filter.periodStart, -1),
-    periodEnd: addYear(filter.periodEnd, -1),
-  };
-}
 
 export function indicatorsQuery() {
   return knex({ o: "b_sale_order" })

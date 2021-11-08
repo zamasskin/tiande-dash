@@ -1,4 +1,5 @@
-import { getFilterMonthAgo, getFilterYearAgo, indicatorsQuery } from ".";
+import { getFilterMonthAgo, getFilterYearAgo } from "./filter";
+import { indicatorsQuery } from "./index";
 import { FilterState } from "../../features/indicators/filterSlice";
 import { qb as knex } from "../../settings/api";
 import { numberFormatRub } from "../number";
