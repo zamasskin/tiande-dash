@@ -19,7 +19,7 @@ export function loyaltyTransferQuery() {
   return knex("b_sale_order_props_value")
     .select("ID")
     .where("ORDER_PROPS_ID", 126)
-    .where("VALUE", "N");
+    .where("VALUE", "Y");
 }
 
 export function loyaltyPriceQuery() {
