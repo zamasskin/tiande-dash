@@ -25,7 +25,7 @@ const [startDate, endDate] = getDefaultDateRange();
 const initialState: FilterState = {
   periodStart: startDate.getTime(),
   periodEnd: endDate.getTime(),
-  country: 134,
+  country: 0,
   storage: "",
   currency: "",
   isApp: 0,
@@ -36,7 +36,7 @@ const initialState: FilterState = {
   periodUserNewStart: 0,
   periodUserNewEnd: 0,
   isEs: 0,
-  isBoutique: 2,
+  isBoutique: 0,
 };
 
 export const indicatorsFilterSlice = createSlice({
