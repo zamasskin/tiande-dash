@@ -41,7 +41,7 @@ export async function comparativeAnalysis(filter: FilterState) {
   const averageCheckFirstYear = p1.average_check - p3.average_check;
 
   const callPercent = (sum1: number, sum2: number) =>
-    Number((sum1 / sum2) * 100).toFixed(2) + "%";
+    (Number((sum1 / sum2) * 100) || 0).toFixed(2) + "%";
 
   return [
     {
