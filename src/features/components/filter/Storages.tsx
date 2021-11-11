@@ -8,7 +8,7 @@ interface StoragesProps extends FormSelectProps {
 }
 
 function Storages(props: StoragesProps) {
-  const none = {value: 0, text: 'Все склады'}
+  const none = {value: '', text: 'Все склады'}
   const [selectOptions, setOptions] = useState([none]);
 
   fetchStorage()

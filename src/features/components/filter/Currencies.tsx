@@ -8,7 +8,7 @@ interface CurrenciesProps extends FormSelectProps {
 }
 
 function Currencies(props: CurrenciesProps) {
-  const none = { value: 0, text: "Все валюты" };
+  const none = { value: '', text: "Все валюты" };
   const [selectOptions, setOptions] = useState([none]);
 
   fetchCurrencies()
