@@ -18,9 +18,11 @@ import {
 } from "../number";
 import { SalesPerformanceDefault } from "./initData";
 import {
+  endTime,
   getFilterMonthAgo,
   getFilterYearAgo,
   indicators,
+  startTime,
 } from "../../features/functions/date";
 import moment from "moment";
 import { dateFormat } from "../../constants";
@@ -51,10 +53,23 @@ export function ballsQuery() {
     .where("ORDER_PROPS_ID", 39);
 }
 
+export function userNewQuery(start: number, end: number) {
+  start = startTime(start);
+  end = endTime(end);
+  return knex("b_user")
+    .select("ID")
+    .where("DATE_REGISTER", ">=", new Date(start))
+    .where("DATE_REGISTER", "<=", new Date(end));
+}
+
 export function SalesPerformanceQuery(filter: FilterState) {
   const { periodStart, periodEnd } = filter;
   const dateStart = moment(periodStart).format("YYYY-MM-DD HH:mm:ss");
   const dateEnd = moment(periodEnd).format("YYYY-MM-DD HH:mm:ss");
+  const userQuery = userNewQuery(filter.periodStart, filter.periodEnd).where(
+    "ID",
+    knex.raw("o.USER_ID")
+  );
   const selectPropsQuery = (query: () => Knex.QueryBuilder) =>
     query().where("ORDER_ID", knex.raw("o.ID"));
 
@@ -90,7 +105,11 @@ export function SalesPerformanceQuery(filter: FilterState) {
     knex.raw("COUNT(distinct o.USER_ID) as saleUsersCount"),
     //numberOfClientsNew
     knex.raw(
-      `COUNT(DISTINCT IF(u.DATE_REGISTER >= '${dateStart}' AND u.DATE_REGISTER <= '${dateEnd}', u.ID, 0)) - SUM(DISTINCT IF(u.DATE_REGISTER >= '${dateStart}' AND u.DATE_REGISTER <= '${dateEnd}', 0, 1)) as numberOfClientsNew`
+      util.format(
+        "COUNT(DISTINCT (%s)) as %s",
+        userQuery.toQuery(),
+        "numberOfClientsNew"
+      )
     ),
     //countPickup
     selectCount(pickupQuery, "countPickup"),
@@ -122,22 +141,28 @@ export async function SalesPerformanceResult(filter: FilterState) {
       sumDays: numberFormatRub(result.salesSum / days),
       salesSumNew: numberFormatRub(result.salesSumNew),
       averageCheck: numberFormatRub(result.salesSum / result.count),
-      numberOfOrders: `${result.count} шт`,
-      numberOfClientsNew: result.numberOfClientsNew,
-      shareOfNewbies: numberFormat(
-        result.numberOfClientsNew / result.saleUsersCount
+      numberOfOrders: util.format("%s  шт", numberFormat(result.count, 0)),
+      numberOfClientsNew: numberFormat(result.numberOfClientsNew, 0),
+      shareOfNewbies: util.format(
+        "%s  %",
+        numberFormat(
+          (result.numberOfClientsNew / result.saleUsersCount) * 100,
+          2
+        )
       ),
       shareOfNewbiesBySale: numberFormatRub(
-        result.salesSumNew / result.salesSum
+        result.salesSumNew / result.salesSum,
+        0
       ),
       shareOfPickup: `${numberFormat(
-        (result.countPickup / result.count) * 100
+        (result.countPickup / result.count) * 100,
+        2
       )} %`,
       balls: numberFormatBall(result.balls),
       loyalty: numberFormatDe(result.loyalty),
-      numberOfClients: numberFormat(result.saleUsersCount),
-      averageCheckBalls: numberFormat(result.balls / result.count),
-      numberOfOrdersLoyalty: result.numberOfOrdersLoyalty,
+      numberOfClients: numberFormat(result.saleUsersCount, 0),
+      averageCheckBalls: numberFormat(result.balls / result.count, 0),
+      numberOfOrdersLoyalty: numberFormat(result.numberOfOrdersLoyalty, 0),
     };
   }
 
