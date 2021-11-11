@@ -42,6 +42,7 @@ export function preparePeriod(
   end: number
 ) {
   if (start > 0 && end > 0) {
+    console.log(1);
     const dateStart = moment(start),
       dateEnd = moment(end);
     dateStart.set({ hour: 0, minute: 0, second: 0 });

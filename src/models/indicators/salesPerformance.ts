@@ -12,8 +12,13 @@ import {
   numberFormatRub,
 } from "../number";
 import { SalesPerformanceDefault } from "./initData";
-import { indicators } from "../../features/functions/date";
+import {
+  getFilterMonthAgo,
+  getFilterYearAgo,
+  indicators,
+} from "../../features/functions/date";
 import moment from "moment";
+import { dateFormat } from "../../constants";
 
 export function loyaltyTransferQuery() {
   return knex("b_sale_order_props_value")
@@ -91,13 +96,20 @@ export function SalesPerformanceQuery(filter: FilterState) {
   return query;
 }
 
-export async function SalesPerformance(filter: FilterState) {
+export async function SalesPerformanceResult(filter: FilterState) {
   const days = indicators.diff(filter.periodStart, filter.periodEnd);
   const result = await SalesPerformanceQuery(filter).first();
+  const { periodStart, periodEnd } = filter;
+  const period =
+    moment(periodStart).format(dateFormat) +
+    " - " +
+    moment(periodEnd).format(dateFormat);
 
   //countUserNew
   if (result) {
     return {
+      days,
+      period,
       salesSum: numberFormatRub(result.salesSum),
       sumDays: numberFormatRub(result.salesSum / days),
       salesSumNew: numberFormatRub(result.salesSumNew),
@@ -122,4 +134,14 @@ export async function SalesPerformance(filter: FilterState) {
   }
 
   return SalesPerformanceDefault;
+}
+
+export function SalesPerformance(filter: FilterState) {
+  const filterMonthAgo = getFilterMonthAgo(filter),
+    filterYearAgo = getFilterYearAgo(filter);
+  return Promise.all([
+    SalesPerformanceResult(filter),
+    SalesPerformanceResult(filterMonthAgo),
+    SalesPerformanceResult(filterYearAgo),
+  ]);
 }
