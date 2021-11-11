@@ -21,3 +21,13 @@ export async function fetchSalesPerformance(filter: FilterState) {
   );
   return prepareResponse(response);
 }
+
+export async function fetchPlanFactAnalysis(filter: FilterState) {
+  const response = await axios.post<Response>(
+    "/api/indicators/plan-fact-analysis",
+    {
+      filter,
+    }
+  );
+  return prepareResponse(response);
+}
