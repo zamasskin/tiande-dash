@@ -63,9 +63,9 @@ export function userNewQuery(start: number, end: number) {
 }
 
 export function SalesPerformanceQuery(filter: FilterState) {
-  const { periodStart, periodEnd } = filter;
-  const dateStart = moment(periodStart).format("YYYY-MM-DD HH:mm:ss");
-  const dateEnd = moment(periodEnd).format("YYYY-MM-DD HH:mm:ss");
+  let { periodStart, periodEnd } = filter;
+  const dateStart = moment(periodStart).format("YYYY-MM-DD 00:00:00");
+  const dateEnd = moment(periodEnd).format("YYYY-MM-DD 23:59:59");
   const userQuery = userNewQuery(filter.periodStart, filter.periodEnd).where(
     "ID",
     knex.raw("o.USER_ID")
@@ -150,9 +150,9 @@ export async function SalesPerformanceResult(filter: FilterState) {
           2
         )
       ),
-      shareOfNewbiesBySale: numberFormatRub(
-        result.salesSumNew / result.salesSum,
-        0
+      shareOfNewbiesBySale: util.format(
+        "%s  %",
+        numberFormat((result.salesSumNew / result.salesSum) * 100, 2)
       ),
       shareOfPickup: `${numberFormat(
         (result.countPickup / result.count) * 100,
@@ -161,7 +161,7 @@ export async function SalesPerformanceResult(filter: FilterState) {
       balls: numberFormatBall(result.balls),
       loyalty: numberFormatDe(result.loyalty),
       numberOfClients: numberFormat(result.saleUsersCount, 0),
-      averageCheckBalls: numberFormat(result.balls / result.count, 0),
+      averageCheckBalls: numberFormatBall(result.balls / result.count),
       numberOfOrdersLoyalty: numberFormat(result.numberOfOrdersLoyalty, 0),
     };
   }
