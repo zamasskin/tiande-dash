@@ -37,6 +37,15 @@ export function prepareFilter(query: Knex.QueryBuilder, filter: FilterState) {
   return query;
 }
 
+export function prepareFilterPlanFactIndicators(
+  query: Knex.QueryBuilder,
+  filter: FilterState
+) {
+  query = preparePeriod(query, filter.periodStart, filter.periodEnd);
+  query = prepareCountry(query, filter.country);
+  return query;
+}
+
 export function preparePeriod(
   qb: Knex.QueryBuilder,
   start: number,
