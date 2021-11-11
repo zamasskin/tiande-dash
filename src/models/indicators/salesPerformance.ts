@@ -2,7 +2,12 @@ import { Knex } from "knex";
 import util from "util";
 
 import { qb as knex } from "../../settings/api";
-import { indicatorsQuery, currencyRateJoin, joinUser } from ".";
+import {
+  indicatorsQuery,
+  currencyRateJoin,
+  joinUser,
+  joinLocationProps,
+} from ".";
 import { FilterState } from "../../features/indicators/filterSlice";
 import { prepareFilter } from "./filter";
 import {
@@ -65,6 +70,7 @@ export function SalesPerformanceQuery(filter: FilterState) {
 
   let query = indicatorsQuery();
   query = currencyRateJoin(query);
+  query = joinLocationProps(query);
   query = prepareFilter(query, filter);
   query = joinUser(query);
   query = query.select(
@@ -93,10 +99,12 @@ export function SalesPerformanceQuery(filter: FilterState) {
     //loyalty
     selectSum(loyaltyPriceQuery, "loyalty")
   );
+  console.log("---", query.toQuery());
   return query;
 }
 
 export async function SalesPerformanceResult(filter: FilterState) {
+  console.log(1);
   const days = indicators.diff(filter.periodStart, filter.periodEnd);
   const result = await SalesPerformanceQuery(filter).first();
   const { periodStart, periodEnd } = filter;
