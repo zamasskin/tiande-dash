@@ -122,7 +122,6 @@ export function SalesPerformanceQuery(filter: FilterState) {
 }
 
 export async function SalesPerformanceResult(filter: FilterState) {
-  console.log(1);
   const days = indicators.diff(filter.periodStart, filter.periodEnd);
   const result = await SalesPerformanceQuery(filter).first();
   const { periodStart, periodEnd } = filter;
