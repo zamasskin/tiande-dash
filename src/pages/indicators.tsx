@@ -6,6 +6,7 @@ import { Container, Navbar, Row, Col} from 'react-bootstrap'
 import Filter from '../features/indicators/Filter'
 import ComparativeAnalysis from '../features/indicators/ComparativeAnalysis'
 import SalesPerformance from '../features/indicators/SalesPerformance'
+import PlanFactAnalysis from '../features/indicators/PlanFactAnalysis'
 
 
 const IndicatorsPage: NextPage = () => { 
@@ -40,6 +41,14 @@ const IndicatorsPage: NextPage = () => {
       </Row>
       <Row className="mb-3">
         <SalesPerformance/>
+      </Row>
+      <Row>
+        <Col>
+          <h2>План-фактный анализ</h2>
+        </Col>
+      </Row>
+      <Row className="mb-3">
+        <PlanFactAnalysis />
       </Row>
     </Container>
   </>
