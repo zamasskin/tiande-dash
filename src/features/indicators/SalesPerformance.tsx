@@ -38,8 +38,7 @@ export function Performance({name, indicators}) {
   return (
     <Card className="shadow-sm">
       <Card.Body>
-        <Card.Title className="text-md-center text-xl-left">{name}</Card.Title>
-        {/* <p className="card-title text-md-center text-xl-left">{name}</p> */}
+        <p className="card-title text-md-left">{name}</p>
         <div>
           <Table>
             <thead>

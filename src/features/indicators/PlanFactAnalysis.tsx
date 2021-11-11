@@ -36,7 +36,7 @@ export function CardItem({title, children = ""}) {
   return (
     <Card className="shadow-sm">
       <Card.Body>
-        <Card.Title className="text-md-center text-xl-left">{title}</Card.Title>
+        <p className="card-title text-md-left">{title}</p>
         <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
           <h3 className="mb-0 mb-md-2 mb-xl-0 order-xl-0">{children}</h3>
         </div>
