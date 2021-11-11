@@ -162,7 +162,10 @@ export async function SalesPerformanceResult(filter: FilterState) {
       loyalty: numberFormatDe(result.loyalty),
       numberOfClients: numberFormat(result.saleUsersCount, 0),
       averageCheckBalls: numberFormatBall(result.balls / result.count),
-      numberOfOrdersLoyalty: numberFormat(result.numberOfOrdersLoyalty, 0),
+      numberOfOrdersLoyalty: util.format(
+        "%s  шт",
+        numberFormat(result.numberOfOrdersLoyalty, 0)
+      ),
     };
   }
 
