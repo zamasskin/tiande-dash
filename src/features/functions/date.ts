@@ -34,6 +34,19 @@ export function getFilterYearAgo(filter: FilterState) {
   };
 }
 
+export function startTime(time: number) {
+  return moment(time)
+    .set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
+    .toDate()
+    .getTime();
+}
+export function endTime(time: number) {
+  return moment(time)
+    .set({ hour: 23, minute: 59, second: 59, millisecond: 999 })
+    .toDate()
+    .getTime();
+}
+
 export const indicators = {
   diff: (start: number, end: number) =>
     moment(end).diff(moment(start), "days") + 1,

@@ -13,6 +13,7 @@ import {
   joinUserProperties,
 } from "./index";
 import { FilterState } from "../../features/indicators/filterSlice";
+import { endTime, startTime } from "../../features/functions/date";
 
 export type yn = 0 | 1 | 2;
 
@@ -42,7 +43,8 @@ export function preparePeriod(
   end: number
 ) {
   if (start > 0 && end > 0) {
-    console.log(1);
+    start = startTime(start);
+    end = endTime(end);
     const dateStart = moment(start),
       dateEnd = moment(end);
     dateStart.set({ hour: 0, minute: 0, second: 0 });
