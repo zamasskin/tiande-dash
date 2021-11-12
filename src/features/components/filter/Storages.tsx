@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {FormSelect, FormSelectProps} from 'react-bootstrap'
 
-import { fetchStorage } from '../../../models/api/filter';
+import { fetchStorage } from '../../api/filter';
 
 interface StoragesProps extends FormSelectProps {
   value?: string

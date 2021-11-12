@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {FormSelect, FormSelectProps} from 'react-bootstrap'
 
-import { fetchCountry } from '../../../models/api/filter';
+import { fetchCountry } from '../../api/filter';
 interface CountryProps extends FormSelectProps {
   value?: number,
   params?: {

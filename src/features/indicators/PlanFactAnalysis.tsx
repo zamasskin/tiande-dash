@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Col, Card} from 'react-bootstrap'
 
 import { useAppSelector } from '../../app/hooks';
-import { fetchPlanFactAnalysis } from '../../models/api/indicators';
+import { fetchPlanFactAnalysis } from '../api/indicators';
 import { selectFilterIndicator } from './filterSlice';
 
 function PlanFactAnalysis() {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FilterState } from "../../features/indicators/filterSlice";
+import { FilterState } from "../indicators/filterSlice";
 import { prepareResponse, Response } from "./index";
 
 export async function fetchComparativeAnalysis(filter: FilterState) {

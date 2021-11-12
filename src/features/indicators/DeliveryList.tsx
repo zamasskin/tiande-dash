@@ -3,7 +3,7 @@ import { Col, Card, Table} from 'react-bootstrap'
 
 import { useAppSelector } from '../../app/hooks';
 import { selectFilterIndicator } from './filterSlice';
-import { fetchDeliveryList } from '../../models/api/indicators';
+import { fetchDeliveryList } from '../api/indicators';
 
 function DeliveryList() {
   const filter = useAppSelector(selectFilterIndicator);

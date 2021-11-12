@@ -1,7 +1,7 @@
 import  { useState } from "react";
 import {FormSelect, FormSelectProps} from 'react-bootstrap'
 
-import { fetchCurrencies } from "../../../models/api/filter";
+import { fetchCurrencies } from "../../api/filter";
 
 interface CurrenciesProps extends FormSelectProps {
   value?: string

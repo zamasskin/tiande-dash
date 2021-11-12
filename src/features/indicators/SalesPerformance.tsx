@@ -4,7 +4,7 @@ import { Col, Card, Table} from 'react-bootstrap'
 
 import { useAppSelector } from '../../app/hooks';
 import { selectFilterIndicator } from './filterSlice';
-import { fetchSalesPerformance } from '../../models/api/indicators';
+import { fetchSalesPerformance } from '../api/indicators';
 import { SalesPerformanceDefault } from '../../models/indicators/initData';
 
 

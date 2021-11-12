@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import {FormSelect, FormSelectProps} from 'react-bootstrap'
 
-import { fetchShipmentMethod } from "../../../models/api/filter";
+import { fetchShipmentMethod } from "../../api/filter";
 
 interface CurrenciesProps extends FormSelectProps {
   value?: string

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DynamicsFilterState } from "../../features/dynamics/filterSlice";
+import { DynamicsFilterState } from "../dynamics/filterSlice";
 import { prepareResponse, Response } from "./index";
 
 export async function fetchDeliveryGroupList(filter: DynamicsFilterState) {

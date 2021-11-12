@@ -5,7 +5,7 @@ import { useAppSelector } from '../../../app/hooks';
 import { selectPeriodEnd, selectPeriodStart, selectFilterIndicator } from '../filterSlice';
 import {dateFormat} from '../../../constants'
 import moment from 'moment';
-import { fetchComparativeAnalysis } from '../../../models/api/indicators';
+import { fetchComparativeAnalysis } from '../../api/indicators';
 
 function ComparativeAnalysis() {
   const filter = useAppSelector(selectFilterIndicator)
