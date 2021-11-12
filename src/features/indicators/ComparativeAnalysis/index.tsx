@@ -10,6 +10,7 @@ import { fetchComparativeAnalysis } from '../../../models/api/indicators';
 function ComparativeAnalysis() {
   const filter = useAppSelector(selectFilterIndicator)
   const [indicators, setData] = useState([]);
+  const [preloader, setPreloader] = useState(false);
   const def = {price: '0 руб', percent: '0%'}
   const [
     salesMonth=def, salesYear = def,
@@ -19,31 +20,36 @@ function ComparativeAnalysis() {
 
   useEffect(() => {
     (async () => {
+      setPreloader(true)
       setData(await fetchComparativeAnalysis(filter))
-    })();
+    })().finally(() => setPreloader(false));
   }, [filter])
   return (
     <>
       <Col>
-        <ComparativeAnalysis.Card 
+        <ComparativeAnalysis.Card
+          preloader={preloader} 
           title="Продажи 1 месяц" 
           price={salesMonth.price}
           percent={salesMonth.percent}/>
       </Col>
       <Col>
         <ComparativeAnalysis.Card 
+          preloader={preloader} 
           title="Продажи 1 год" 
           price={salesYear.price}
           percent={salesYear.percent}/>
       </Col>
       <Col>
         <ComparativeAnalysis.Card 
+          preloader={preloader} 
           title="Средний чек 1 месяц" 
           price={checkMonth.price}
           percent={checkMonth.percent}/>
       </Col>
       <Col>
         <ComparativeAnalysis.Card 
+          preloader={preloader} 
           title="Средний чек 1 год" 
           price={checkYear.price}
           percent={checkYear.percent}/>
@@ -53,12 +59,12 @@ function ComparativeAnalysis() {
 }
 
 
-ComparativeAnalysis.Card = function({title, price, percent}) {
+ComparativeAnalysis.Card = function({title, price, percent, preloader = false}) {
   const periodStart = useAppSelector(selectPeriodStart);
   const periodEnd = useAppSelector(selectPeriodEnd);
   const period =  `${moment(periodStart).format(dateFormat)} - ${moment(periodEnd).format(dateFormat)}`
   return (
-    <Card className="shadow-sm">
+    <Card className={preloader ? "shadow-sm preloader" : "shadow-sm"}>
       <Card.Body>
         <p>{title}</p>
         <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
