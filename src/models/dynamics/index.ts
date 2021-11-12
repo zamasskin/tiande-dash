@@ -17,18 +17,21 @@ export function dynamicsSaleQuery(filter: DynamicsFilterState) {
   let query = indicatorsQuery();
   query = currencyRateJoin(query);
   query = joinLocationProps(query);
+  query = joinUser(query);
   query = prepareFilter(query, filter);
   query = query.select(
     knex.raw(
       "round(sum(if(o.CURRENCY='RUB', o.price, o.price / k.RATE_CNT * k.RATE)),2) as salesSum"
     ),
-    knex.raw("date_format(o.DATE_INSERT, period_type) AS 'date'"),
+    knex.raw(`date_format(o.DATE_INSERT, '${filter.periodType}') AS 'date'`),
     //salesSumNew
     knex.raw(
       `round(sum(IF(u.DATE_REGISTER >= '${dateStart}' AND u.DATE_REGISTER <= '${dateEnd}', if(o.CURRENCY='RUB', o.price, o.price / k.RATE_CNT * k.RATE),0)),2) as salesSumNew`
     )
   );
-  knex.groupBy(knex.raw("date_format(o.DATE_INSERT, period_type)"));
+  query = query.groupBy(
+    knex.raw(`date_format(o.DATE_INSERT, '${filter.periodType}')`)
+  );
   return query;
 }
 
