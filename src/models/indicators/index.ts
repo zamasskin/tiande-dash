@@ -96,6 +96,14 @@ export function joinPickupProps(qb: Knex.QueryBuilder) {
       );
 }
 
+export function joinPvzProps(qb: Knex.QueryBuilder) {
+  return checkRequiredJoin(qb, "op9", "b_sale_order_props_value")
+    ? qb
+    : qb.leftJoin({ op9: "b_sale_order_props_value" }, (qb) =>
+        qb.on("op9.ORDER_ID", "o.ID").andOn("op9.ORDER_PROPS_ID", knex.raw(91))
+      );
+}
+
 export function joinIsBoutiqueProps(qb: Knex.QueryBuilder) {
   return checkRequiredJoin(qb, "op8", "b_sale_order_props_value")
     ? qb
