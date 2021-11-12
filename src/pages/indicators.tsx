@@ -7,6 +7,7 @@ import Filter from '../features/indicators/Filter'
 import ComparativeAnalysis from '../features/indicators/ComparativeAnalysis'
 import SalesPerformance from '../features/indicators/SalesPerformance'
 import PlanFactAnalysis from '../features/indicators/PlanFactAnalysis'
+import DeliveryList from '../features/indicators/DeliveryList'
 
 
 const IndicatorsPage: NextPage = () => { 
@@ -49,6 +50,14 @@ const IndicatorsPage: NextPage = () => {
       </Row>
       <Row className="mb-3">
         <PlanFactAnalysis />
+      </Row>
+      <Row>
+        <Col>
+          <h2>Распределение по службам доставок</h2>
+        </Col>
+      </Row>
+      <Row className="mb-3">
+        <DeliveryList />
       </Row>
     </Container>
   </>

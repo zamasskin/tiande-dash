@@ -76,7 +76,7 @@ export async function prepareDeliveryList(deliveryIndicators: any[]) {
   return deliveryIndicators.map((indicators) => ({
     ...indicators,
     salesSum: numberFormatRub(indicators.salesSum),
-    sum: (indicators.sum / $sum) * 100,
+    share: (indicators.sum / $sum) * 100,
   }));
 }
 
