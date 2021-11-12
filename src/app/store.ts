@@ -2,12 +2,14 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
 import counterReducer from "../features/counter/counterSlice";
 import indicatorsFilterReducer from "../features/indicators/filterSlice";
+import dynamicsFilterReducer from "../features/dynamics/filterSlice";
 
 export function makeStore() {
   return configureStore({
     reducer: {
       counter: counterReducer,
       indicatorsFilter: indicatorsFilterReducer,
+      dynamicsFilter: dynamicsFilterReducer,
     },
   });
 }
