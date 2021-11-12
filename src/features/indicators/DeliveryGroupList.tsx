@@ -8,14 +8,17 @@ import { fetchDeliveryGroupList } from '../../models/api/indicators';
 function DeliveryGroupList() {
   const filter = useAppSelector(selectFilterIndicator);
   const [deliveryGroupList, setData] = useState([]);
+  const [preloader, setPreloader] = useState(false);
   useEffect(() => {
     (async () => {
+      setPreloader(true)
       setData(await fetchDeliveryGroupList(filter))
-    })();
+    })().finally(() => setPreloader(false));
   }, [filter])
+  
   return (
     <Col>
-      <Card className="shadow-sm">
+      <Card className={preloader ? "shadow-sm preloader" : "shadow-sm"}>
         <Card.Body>
           <Table>
             <thead>
