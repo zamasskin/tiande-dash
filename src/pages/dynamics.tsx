@@ -1,4 +1,6 @@
 import type { NextPage } from 'next'
+import Router from 'next/router'
+import { useEffect } from "react";
 import Head from 'next/head'
 import { Container, Navbar, Row, Col} from 'react-bootstrap'
 
@@ -22,13 +24,20 @@ const DynamicsPage: NextPage = () => {
           <Filter/>
         </Col>
       </Row>
-      <Row className="mb-3">
+      <DynamicsPageContent />
+    </Container>
+  </>
+}
+
+
+const DynamicsPageContent = () => {
+  return (
+    <Row className="mb-3">
         <Col>
           <DynamicSale />
         </Col>
-      </Row>
-    </Container>
-  </>
+    </Row>
+  )
 }
 
 export default DynamicsPage
