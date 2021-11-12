@@ -11,32 +11,43 @@ import { SalesPerformanceDefault } from '../../models/indicators/initData';
 function SalesPerformance() {
   const filter = useAppSelector(selectFilterIndicator);
   const [performanceList, setData] = useState([SalesPerformanceDefault, SalesPerformanceDefault, SalesPerformanceDefault]);
+  const [preloader, setPreloader] = useState(false);
   useEffect(() => {
     (async () => {
+      setPreloader(true)
       setData(await fetchSalesPerformance(filter))
-    })();
+    })().finally(() => setPreloader(false));
   }, [filter])
 
  const [currentData, dataMonthAgo, dataYearAgo] = performanceList
   return(
     <>
       <Col>
-        <Performance name="Показатели текущего периода" indicators={currentData} />
+        <Performance 
+          name="Показатели текущего периода" 
+          indicators={currentData} 
+          preloader={preloader}/>
       </Col>
       <Col>
-        <Performance name="Показатели периода со сдвигом -1 месяц" indicators={dataMonthAgo} />
+        <Performance 
+          name="Показатели периода со сдвигом -1 месяц" 
+          indicators={dataMonthAgo} 
+          preloader={preloader}/>
       </Col>
       <Col>
-        <Performance name="Показатели периода со сдвигом -1 год" indicators={dataYearAgo} />
+        <Performance 
+          name="Показатели периода со сдвигом -1 год" 
+          indicators={dataYearAgo} 
+          preloader={preloader}/>
       </Col>
     </>
   )
 }
 
 
-export function Performance({name, indicators}) {
+export function Performance({name, indicators, preloader=false}) {
   return (
-    <Card className="shadow-sm">
+    <Card className={preloader ? "shadow-sm preloader" : "shadow-sm"}>
       <Card.Body>
         <p className="card-title text-md-left">{name}</p>
         <div>
