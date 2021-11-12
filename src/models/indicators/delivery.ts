@@ -68,10 +68,6 @@ export async function dynamicDeliveryList() {
 }
 
 export async function prepareDeliveryList(deliveryIndicators: any[]) {
-  const [staticList, dynamicList] = await Promise.all([
-    staticDeliveryList(),
-    dynamicDeliveryList(),
-  ]);
   deliveryIndicators = deliveryIndicators.map((indicators) => ({
     ...indicators,
     sum: Number(indicators.sum) || 0,
@@ -79,10 +75,6 @@ export async function prepareDeliveryList(deliveryIndicators: any[]) {
   const $sum = _.sumBy(deliveryIndicators, "sum");
   return deliveryIndicators.map((indicators) => ({
     ...indicators,
-    name:
-      staticList[indicators.name] ||
-      dynamicList[indicators.name] ||
-      indicators.name,
     salesSum: numberFormatRub(indicators.salesSum),
     sum: (indicators.sum / $sum) * 100,
   }));
@@ -90,7 +82,18 @@ export async function prepareDeliveryList(deliveryIndicators: any[]) {
 
 export async function deliveryList(filter: FilterState) {
   const query = deliveryQuery(filter).groupBy("name", "type");
-  const deliveryIndicators = await query;
+  let deliveryIndicators = await query;
+  const [staticList, dynamicList] = await Promise.all([
+    staticDeliveryList(),
+    dynamicDeliveryList(),
+  ]);
+  deliveryIndicators = deliveryIndicators.map((indicators) => ({
+    ...indicators,
+    name:
+      staticList[indicators.name] ||
+      dynamicList[indicators.name] ||
+      indicators.name,
+  }));
   return prepareDeliveryList(deliveryIndicators);
 }
 
