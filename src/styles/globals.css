@@ -14,3 +14,31 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.preloader {
+  position: relative !important;
+}
+
+.preloader::before {
+  content: " ";
+  background: #000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.preloader::after {
+  content: " ";
+  position: absolute;
+  z-index: 2;
+  background: url("../assets/images/spinner.gif") center no-repeat;
+  background-size: 50px 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
