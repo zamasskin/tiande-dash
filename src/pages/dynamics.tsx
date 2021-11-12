@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { Container, Navbar, Row, Col} from 'react-bootstrap'
 
 import Filter from "../features/dynamics/Filter"
+import DynamicSale from "../features/dynamics/DynamicSale"
 
 const DynamicsPage: NextPage = () => {
   return <>
@@ -19,6 +20,11 @@ const DynamicsPage: NextPage = () => {
       <Row className="mb-3">
         <Col>
           <Filter/>
+        </Col>
+      </Row>
+      <Row className="mb-3">
+        <Col>
+          <DynamicSale />
         </Col>
       </Row>
     </Container>
