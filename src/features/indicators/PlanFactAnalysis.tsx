@@ -9,32 +9,34 @@ function PlanFactAnalysis() {
   const $d = "0  руб";
   const filter = useAppSelector(selectFilterIndicator);
   const [data, setData] = useState({fact: $d, plan: $d, abc: $d, otn: $d});
+  const [preloader, setPreloader] = useState(false);
   useEffect(() => {
     (async () => {
+      setPreloader(true)
       setData(await fetchPlanFactAnalysis(filter))
-    })();
+    })().finally(() => setPreloader(false));
   }, [filter])
   return (
     <>
       <Col>
-        <CardItem title="План продаж">{data.plan}</CardItem>
+        <CardItem title="План продаж" preloader={preloader}>{data.plan}</CardItem>
       </Col>
       <Col>
-        <CardItem title="Факт продаж">{data.fact}</CardItem>
+        <CardItem title="Факт продаж" preloader={preloader}>{data.fact}</CardItem>
       </Col>
       <Col>
-        <CardItem title="Абсолютное отклонение">{data.abc}</CardItem>
+        <CardItem title="Абсолютное отклонение" preloader={preloader}>{data.abc}</CardItem>
       </Col>
       <Col>
-      <CardItem title="Относительное отклонение">{data.otn}</CardItem>
+      <CardItem title="Относительное отклонение" preloader={preloader}>{data.otn}</CardItem>
       </Col>
     </>
   )
 }
 
-export function CardItem({title, children = ""}) {
+export function CardItem({title, children = "", preloader = false}) {
   return (
-    <Card className="shadow-sm">
+    <Card className={preloader ? "shadow-sm preloader" : "shadow-sm"}>
       <Card.Body>
         <p className="card-title text-md-left">{title}</p>
         <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
