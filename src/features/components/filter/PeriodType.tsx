@@ -4,8 +4,7 @@ interface PeriodTypeProps extends FormSelectProps {
   value?: string
 }
 
-function PeriodType(props: PeriodTypeProps) {
-  props.value = props.value || "%Y-%m-%d";
+function PeriodType(props: PeriodTypeProps = {value: "%Y-%m-%d"}) {
   return (
     <FormSelect {...props}>
       <option key="day" value="%Y-%m-%d">День</option>
