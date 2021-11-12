@@ -31,3 +31,20 @@ export async function fetchPlanFactAnalysis(filter: FilterState) {
   );
   return prepareResponse(response);
 }
+
+export async function fetchDeliveryList(filter: FilterState) {
+  const response = await axios.post<Response>("/api/indicators/delivery", {
+    filter,
+  });
+  return prepareResponse(response);
+}
+
+export async function fetchDeliveryGroupList(filter: FilterState) {
+  const response = await axios.post<Response>(
+    "/api/indicators/delivery-group",
+    {
+      filter,
+    }
+  );
+  return prepareResponse(response);
+}
