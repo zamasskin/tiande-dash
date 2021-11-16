@@ -4,6 +4,7 @@ import crypto from "crypto";
 
 import { sessionAccess } from "../../models/access";
 import { sessionApiUrl } from "../../settings/api";
+import moment from "moment";
 
 interface ErrorResponse {
   error: string;
@@ -15,13 +16,13 @@ interface Response {
 const sessionHandler: NextApiHandler = async (request, response) => {
   const { sessionId = "" } = request.body;
   const { login, password } = await sessionAccess();
+  console.log(login, password);
 
-  const date = new Date();
+  const date = moment().format("YYYY-MM-DD HH:mm:ss");
   const signature = crypto
     .createHash("sha256")
-    .update(`${login}:${password}:${date}`)
+    .update([login, password, date].join(":"))
     .digest("hex");
-
   let axiosResponse: AxiosResponse<ErrorResponse | Response>;
   try {
     axiosResponse = await axios.post(sessionApiUrl, {
