@@ -12,6 +12,7 @@ function DynamicSale() {
   const dispatch = useAppDispatch()
   const filter = useAppSelector(selectFilterIndicator);
   const [data, setData] = useState([]);
+  const [dragMode, setDragMode]  = useState("pan")
   const [preloader, setPreloader] = useState(false);
   useEffect(() => {
     (async () => {
@@ -21,11 +22,14 @@ function DynamicSale() {
   }, [filter])
 
   const  onRelayout = (data) => {
-    if(!data['xaxis.range[0]'] || !data['xaxis.range[1]']) {
-      return data;
+    if(data["dragmode"]) {
+      setDragMode(data["dragmode"])
     }
-    dispatch(setPeriodStart(new Date(data['xaxis.range[0]']).getTime()))
-    dispatch(setPeriodEnd(new Date(data['xaxis.range[1]']).getTime()))
+    if(data['xaxis.range[0]'] && data['xaxis.range[1]']) {
+      dispatch(setPeriodStart(new Date(data['xaxis.range[0]']).getTime()))
+      dispatch(setPeriodEnd(new Date(data['xaxis.range[1]']).getTime()))
+    }
+   
     return data;
   }
 
@@ -35,7 +39,7 @@ function DynamicSale() {
         <Card.Body>
           <Plot 
             data={data} 
-            layout={{title: 'Динамика продаж', autosize: true, dragmode: 'pan'}}
+            layout={{title: 'Динамика продаж', autosize: true, dragmode: dragMode}}
             style={{width: "100%", height: "100%"}}
             onRelayout={onRelayout}
           ></Plot>
