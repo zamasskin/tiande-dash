@@ -1,11 +1,8 @@
 import axios from "axios";
 import { prepareResponse, Response } from "./index";
 
-export async function fetchCountry(useId = 0, allowed = true) {
-  const response = await axios.post<Response>("/api/filter/countries", {
-    useId,
-    allowed,
-  });
+export async function fetchCountry() {
+  const response = await axios.post<Response>("/api/filter/countries");
 
   return prepareResponse(response);
 }
