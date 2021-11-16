@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import  { useState, useEffect } from "react";
 import {FormSelect, FormSelectProps} from 'react-bootstrap'
 
 import { fetchCurrencies } from "../../api/filter";
@@ -11,9 +11,12 @@ function Currencies(props: CurrenciesProps) {
   const none = { value: '', text: "Все валюты" };
   const [selectOptions, setOptions] = useState([none]);
 
-  fetchCurrencies()
+  useEffect(() => {
+    fetchCurrencies()
     .then((data) => setOptions([none, ...data]))
     .catch((err) => console.log(err));
+  }, [])
+  
 
   return (
     <FormSelect {...props}>

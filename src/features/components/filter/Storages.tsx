@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {FormSelect, FormSelectProps} from 'react-bootstrap'
 
 import { fetchStorage } from '../../api/filter';
@@ -11,9 +11,12 @@ function Storages(props: StoragesProps) {
   const none = {value: '', text: 'Все склады'}
   const [selectOptions, setOptions] = useState([none]);
 
-  fetchStorage()
-    .then((data) => setOptions([none, ...data]))
-    .catch(err => console.log(err))
+  useEffect(() => {
+    fetchStorage()
+      .then((data) => setOptions([none, ...data]))
+      .catch(err => console.log(err))
+  }, [])
+  
 
 
   return (

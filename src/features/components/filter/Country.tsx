@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {FormSelect, FormSelectProps} from 'react-bootstrap'
 
 import { fetchCountry } from '../../api/filter';
@@ -16,10 +16,11 @@ function Country(props: CountryProps) {
   const none = {value: 0, text: 'Все страны'}
   const [selectOptions, setOptions] = useState([none]);
 
-  fetchCountry(useId, allowed)
+  useEffect(() => {
+    fetchCountry(useId, allowed)
     .then((data) => setOptions([none, ...data]))
     .catch(err => console.log(err))
-  
+  }, []); 
 
   return (
     <FormSelect size="lg" {...props}>

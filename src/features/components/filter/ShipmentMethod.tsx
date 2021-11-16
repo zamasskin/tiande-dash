@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {FormSelect, FormSelectProps} from 'react-bootstrap'
 
 import { fetchShipmentMethod } from "../../api/filter";
@@ -12,9 +12,12 @@ function shipmentMethod(props: CurrenciesProps) {
   const none = { value: 0, text: "Все валюты" };
   const [selectOptions, setOptions] = useState([none]);
 
-  fetchShipmentMethod()
-    .then((data) => setOptions([none, ...data]))
-    .catch((err) => console.log(err));
+  useEffect(() => {
+    fetchShipmentMethod()
+      .then((data) => setOptions([none, ...data]))
+      .catch((err) => console.log(err));
+  }, [])
+  
 
   return (
     <FormSelect {...props}>
