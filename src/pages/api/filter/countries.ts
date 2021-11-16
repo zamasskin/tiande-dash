@@ -3,8 +3,6 @@ import type { NextApiHandler } from "next";
 import { findCountryList } from "../../../models/filter";
 
 const countriesHandler: NextApiHandler = async (request, response) => {
-  const { useId = 0, allowed = true } = request.body;
-
   try {
     const countries = await findCountryList(request.cookies["PHPSESSID"]);
     response.json({ result: "ok", data: countries });
