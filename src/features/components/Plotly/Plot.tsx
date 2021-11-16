@@ -5,7 +5,8 @@ interface PlotProperty {
   data?: any, 
   layout?: any, 
   style?: any, 
-  config?:any
+  config?:any,
+  onRelayout?: any,
 }
 
 function Plot(properties: PlotProperty) {
