@@ -16,7 +16,6 @@ interface Response {
 const sessionHandler: NextApiHandler = async (request, response) => {
   const { sessionId = "" } = request.body;
   const { login, password } = await sessionAccess();
-  console.log(login, password);
 
   const date = moment().format("YYYY-MM-DD HH:mm:ss");
   const signature = crypto
