@@ -14,6 +14,7 @@ function DynamicSale() {
   const [data, setData] = useState([]);
   const [dragMode, setDragMode]  = useState("pan")
   const [preloader, setPreloader] = useState(false);
+  const [initialized, setInitialized] = useState(false);
   useEffect(() => {
     (async () => {
       setPreloader(true)
@@ -35,13 +36,14 @@ function DynamicSale() {
 
   return (
     <Col>
-      <Card className={preloader ? "shadow-sm preloader" : "shadow-sm"}>
-        <Card.Body>
+      <Card className={!initialized || preloader ? "shadow-sm preloader" : "shadow-sm"}>
+        <Card.Body style={{minHeight: "380px"}}>
           <Plot 
             data={data} 
             layout={{title: 'Динамика продаж', autosize: true, dragmode: dragMode}}
             style={{width: "100%", height: "100%"}}
             onRelayout={onRelayout}
+            onInitialized={() => setInitialized(true)}
           ></Plot>
         </Card.Body>
       </Card>

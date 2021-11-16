@@ -7,6 +7,7 @@ interface PlotProperty {
   style?: any, 
   config?:any,
   onRelayout?: any,
+  onInitialized?: any
 }
 
 function Plot(properties: PlotProperty) {
