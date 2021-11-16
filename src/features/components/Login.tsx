@@ -32,7 +32,7 @@ function Login({children}) {
      return openForm();
     }
     const sessionData = await fetchSession(phpSessId);
-    if(!sessionData) {
+    if((Array.isArray(sessionData) && sessionData.length === 0 ) || !sessionData) {
       return openForm();
     }
    })()
