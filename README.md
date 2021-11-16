@@ -1,23 +1,31 @@
-# Redux Toolkit TypeScript Example
+# Отчеты для сайта tiande.ru
 
-This example shows how to integrate Next.js with [Redux Toolkit](https://redux-toolkit.js.org).
+Отчеты с использованием библиотеки plotly. Написано на React.js
 
-The **Redux Toolkit** is a standardized way to write Redux logic (create actions and reducers, setup the store with some default middlewares like redux devtools extension). This example demonstrates each of these features with Next.js
+## Установка
 
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-redux&project-name=with-redux&repository-name=with-redux)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-redux with-redux-app
-# or
-yarn create next-app --example with-redux with-redux-app
+```sh
+$ npm install
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## Настройка
+
+В корне папки библиотеки нужно создать файл с названием «.env.local».
+Настроить по примеру ниже
+
+```s
+DATABASE_HOST=127.0.0.1
+DATABASE_USER=root
+DATABASE_PASS=
+DATABASE_PORT=3306
+DATABASE_NAME=
+
+DOMAIN=127.0.0.1
+HOME_PATH=
+```
+
+## Запуск
+
+```sh
+$ npm start
+```

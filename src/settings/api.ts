@@ -17,3 +17,4 @@ export const qb = knex({
 
 export const sessionApiUrl = "https://tiande.ru/api/v1/session.php";
 export const domain = process.env.DOMAIN || "127.0.0.1";
+const homePath = process.env.HOME_PATH || "";
