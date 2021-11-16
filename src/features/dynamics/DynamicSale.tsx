@@ -22,10 +22,11 @@ function DynamicSale() {
 
   const  onRelayout = (data) => {
     if(!data['xaxis.range[0]'] || !data['xaxis.range[1]']) {
-      return;
+      return data;
     }
     dispatch(setPeriodStart(new Date(data['xaxis.range[0]']).getTime()))
     dispatch(setPeriodEnd(new Date(data['xaxis.range[1]']).getTime()))
+    return data;
   }
 
   return (
@@ -34,7 +35,7 @@ function DynamicSale() {
         <Card.Body>
           <Plot 
             data={data} 
-            layout={{title: 'Динамика продаж', autosize: true}}
+            layout={{title: 'Динамика продаж', autosize: true, dragmode: 'pan'}}
             style={{width: "100%", height: "100%"}}
             onRelayout={onRelayout}
           ></Plot>
