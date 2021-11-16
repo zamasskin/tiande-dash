@@ -46,7 +46,7 @@ const loginHandler: NextApiHandler = async (request, response) => {
         $phpSessId = cookies.PHPSESSID;
       }
     }
-    console.log(axiosResponse.data);
+
     const $ = cheerio.load((axiosResponse.data || "").toString());
     if ($("#sign-in").length > 0) {
       return response.json({
