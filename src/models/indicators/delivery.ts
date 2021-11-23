@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { unserialize } from "php-serialize";
 
-import { qb as knex } from "../../settings/api";
+import { qb as knex } from "../../settings";
 
 import { FilterState } from "../../features/indicators/filterSlice";
 import {

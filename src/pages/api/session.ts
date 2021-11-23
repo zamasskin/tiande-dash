@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import crypto from "crypto";
 
 import { sessionAccess } from "../../models/access";
-import { sessionApiUrl } from "../../settings/api";
+import { sessionApiUrl } from "../../settings";
 import moment from "moment";
 
 interface ErrorResponse {

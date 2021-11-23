@@ -1,6 +1,6 @@
 import type { NextApiHandler } from "next";
 
-import { qb } from "../../../settings/api";
+import { qb } from "../../../settings";
 
 const shipmentMethod: NextApiHandler = async (request, response) => {
   const currencies = await qb("b_sale_order_props_variant")

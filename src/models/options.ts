@@ -1,4 +1,4 @@
-import { qb } from "../settings/api";
+import { qb } from "../settings";
 
 export async function getOptionByName(name: string) {
   const { value = "{}" } = await qb("tiande_options")

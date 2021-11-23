@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { qb as knex } from "../../settings/api";
+import { qb as knex } from "../../settings";
 import { indicatorsQuery, currencyRateJoin, joinLocationProps } from ".";
 import { FilterState } from "../../features/indicators/filterSlice";
 import { prepareFilterPlanFactIndicators } from "./filter";

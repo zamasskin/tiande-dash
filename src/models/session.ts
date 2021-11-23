@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { domain } from "../settings/api";
+import { domain } from "../settings";
 import { prepareResponse, Response } from "../features/api";
 
 export async function fetchSession(sessionId: string) {

@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-import { qb as knex } from "../../settings/api";
+import { qb as knex } from "../../settings";
 import moment from "moment";
 import { from, map, Observable, of } from "rxjs";
 import {

@@ -2,7 +2,7 @@ import { Knex } from "knex";
 import moment from "moment";
 
 import { FilterState } from "../../features/indicators/filterSlice";
-import { qb as knex } from "../../settings/api";
+import { qb as knex } from "../../settings";
 
 export * from "./comparativeAnalysis";
 export * from "./salesPerformance";

@@ -1,5 +1,5 @@
 import { fetchSession } from "./session";
-import { qb } from "../settings/api";
+import { qb } from "../settings";
 
 export async function findCountryList(sessionId: string) {
   const sessionData = await fetchSession(sessionId);

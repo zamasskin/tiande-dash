@@ -1,6 +1,6 @@
 import { indicatorsQuery } from "./index";
 import { FilterState } from "../../features/indicators/filterSlice";
-import { qb as knex } from "../../settings/api";
+import { qb as knex } from "../../settings";
 import { numberFormatRub } from "../number";
 import { currencyRateJoin, joinLocationProps } from "./index";
 import { prepareFilter } from "./filter";

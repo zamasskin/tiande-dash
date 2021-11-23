@@ -1,6 +1,6 @@
 import type { NextApiHandler } from "next";
 
-import { qb } from "../../../settings/api";
+import { qb } from "../../../settings";
 
 const storagesHandler: NextApiHandler = async (request, response) => {
   const storages = await qb("b_catalog_store").select(

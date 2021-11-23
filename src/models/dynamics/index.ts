@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { qb as knex } from "../../settings/api";
+import { qb as knex } from "../../settings";
 import { DynamicsFilterState } from "../../features/dynamics/filterSlice";
 import {
   indicatorsQuery,

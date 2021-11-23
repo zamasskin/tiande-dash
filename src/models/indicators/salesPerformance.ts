@@ -1,7 +1,7 @@
 import { Knex } from "knex";
 import util from "util";
 
-import { qb as knex } from "../../settings/api";
+import { qb as knex } from "../../settings";
 import {
   indicatorsQuery,
   currencyRateJoin,
