@@ -2,11 +2,13 @@ import _ from "lodash";
 import axios from "axios";
 import { DynamicsFilterState } from "../dynamics/filterSlice";
 import { prepareResponse, Response } from "./index";
+import { getUrl } from "../../settings/public";
 
 export async function fetchDynamicSaleList(filter: DynamicsFilterState) {
-  const response = await axios.post<Response>("/api/dynamics/dynamic-sale", {
-    filter,
-  });
+  const response = await axios.post<Response>(
+    getUrl("/api/dynamics/dynamic-sale"),
+    { filter }
+  );
   const data = prepareResponse(response);
   const trace1 = {
     x: _.map(data, "date"),
