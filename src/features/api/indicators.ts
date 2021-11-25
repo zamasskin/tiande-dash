@@ -50,3 +50,11 @@ export async function fetchLtvIndicators(filter: FilterState) {
   );
   return prepareResponse(response);
 }
+
+export async function fetchLtvSalesMonth(filter: FilterState) {
+  const response = await axios.post<Response>(
+    getUrl("/api/indicators/ltv-sales-month"),
+    { filter }
+  );
+  return prepareResponse(response);
+}
