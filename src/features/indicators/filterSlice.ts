@@ -18,6 +18,8 @@ export interface FilterState {
   periodUserNewEnd: number;
   isEs: yn;
   isBoutique: yn;
+  periodUserRegisterStart: number;
+  periodUserRegisterEnd: number;
 }
 
 const [startDate, endDate] = getDefaultDateRange();
@@ -37,6 +39,8 @@ const initialState: FilterState = {
   periodUserNewEnd: 0,
   isEs: 0,
   isBoutique: 0,
+  periodUserRegisterStart: startDate.getTime(),
+  periodUserRegisterEnd: endDate.getTime(),
 };
 
 export const indicatorsFilterSlice = createSlice({
@@ -85,6 +89,12 @@ export const indicatorsFilterSlice = createSlice({
     setIsBoutique(state, action: PayloadAction<yn>) {
       state.isBoutique = action.payload;
     },
+    setPeriodUserRegisterStart(state, action: PayloadAction<number>) {
+      state.periodUserRegisterStart = action.payload;
+    },
+    setPeriodUserRegisterEnd(state, action: PayloadAction<number>) {
+      state.periodUserRegisterEnd = action.payload;
+    },
   },
 });
 
@@ -103,6 +113,8 @@ export const {
   setIsBoutique,
   setPeriodStart,
   setPeriodEnd,
+  setPeriodUserRegisterStart,
+  setPeriodUserRegisterEnd,
 } = indicatorsFilterSlice.actions;
 
 export const selectPeriodStart = (state: AppState) =>
@@ -146,5 +158,11 @@ export const selectIsBoutique = (state: AppState) =>
 
 export const selectFilterIndicator = (state: AppState) =>
   state.indicatorsFilter;
+
+export const selectPeriodUserRegisterStart = (state: AppState) =>
+  state.indicatorsFilter.periodUserRegisterStart;
+
+export const selectPeriodUserRegisterEnd = (state: AppState) =>
+  state.indicatorsFilter.periodUserRegisterEnd;
 
 export default indicatorsFilterSlice.reducer;
