@@ -1,5 +1,6 @@
 import moment from "moment";
 import _ from "lodash";
+import util from "util";
 
 import { qb as knex } from "../../settings";
 import { indicatorsQuery, currencyRateJoin, joinLocationProps } from ".";
@@ -92,7 +93,10 @@ export function purchasesInPeriodQuery(filter: FilterState) {
 
 export async function purchasesInPeriod(filter: FilterState) {
   const result = await purchasesInPeriodQuery(filter);
-  return result;
+  return result.map((item) => ({
+    cnt: util.format("%s раз", item.cnt),
+    count: util.format("%s чел", item.count),
+  }));
 }
 
 export async function ltvIndicators(filter: FilterState) {
