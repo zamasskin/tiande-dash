@@ -58,6 +58,43 @@ export async function salesByMonth(filter: FilterState) {
     .value();
 }
 
+export function purchasesInPeriodQuery(filter: FilterState) {
+  let query = indicatorsQuery();
+  query = currencyRateJoin(query);
+  query = joinLocationProps(query);
+  query = prepareFilter(query, filter);
+  query = query.groupBy([
+    knex.raw(`date_format(o.DATE_INSERT, '%Y-%m')`),
+    "o.USER_ID",
+  ]);
+
+  query = query.select(
+    //date
+    knex.raw(`date_format(o.DATE_INSERT, '%Y-%m') as date`),
+    //userId
+    knex.raw("o.USER_ID as userId"),
+    // cnt
+    knex.raw("1 as cnt")
+  );
+
+  // Нижнее вложение
+  query = knex(query.as("t1"));
+  query = query.groupBy("userId");
+  query = query.select("*", knex.raw("sum(cnt) as sumCnt"));
+
+  // Верхнее вложение
+  query = knex(query.as("t2"));
+  query = query.groupBy("sumCnt");
+  query = query.select("sumCnt as cnt", knex.raw("COUNT(userId) as count"));
+
+  return query;
+}
+
+export async function purchasesInPeriod(filter: FilterState) {
+  const result = await purchasesInPeriodQuery(filter);
+  return result;
+}
+
 export async function ltvIndicators(filter: FilterState) {
   const [saleResult, { registerCount } = { registerCount: 0 }] =
     await Promise.all([
