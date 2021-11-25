@@ -42,3 +42,11 @@ export async function fetchDeliveryGroupList(filter: FilterState) {
   );
   return prepareResponse(response);
 }
+
+export async function fetchLtvIndicators(filter: FilterState) {
+  const response = await axios.post<Response>(
+    getUrl("/api/indicators/ltv-indicators"),
+    { filter }
+  );
+  return prepareResponse(response);
+}

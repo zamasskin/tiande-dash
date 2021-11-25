@@ -46,6 +46,21 @@ export function prepareFilterPlanFactIndicators(
   return query;
 }
 
+export function prepareLtvFilter(
+  query: Knex.QueryBuilder,
+  filter: FilterState
+) {
+  const newFilter = { ...filter, periodUserNewStart: 0, periodUserNewEnd: 0 };
+  query = prepareFilter(query, newFilter);
+  query = prepareUserCountry(query, filter.country);
+  prepareUserNew(
+    query,
+    filter.periodUserRegisterStart,
+    filter.periodUserRegisterEnd
+  );
+  return query;
+}
+
 export function preparePeriod(
   qb: Knex.QueryBuilder,
   start: number,
@@ -164,6 +179,13 @@ export function prepareBoutique(qb: Knex.QueryBuilder, isBoutique: yn) {
         .where("op8.VALUE", isBoutique === 1 ? "Y" : "N")
         .orWhereNull("op8.VALUE")
     );
+  }
+  return qb;
+}
+
+export function prepareUserCountry(qb: Knex.QueryBuilder, countryId: number) {
+  if (countryId > 0) {
+    return joinUserProperties(qb).where("ut.UF_COUNTRY", countryId);
   }
   return qb;
 }
