@@ -10,6 +10,7 @@ import PlanFactAnalysis from '../features/indicators/PlanFactAnalysis'
 import DeliveryList from '../features/indicators/DeliveryList'
 import DeliveryGroupList from '../features/indicators/DeliveryGroupList'
 import Login from '../features/components/Login'
+import Ltv from '../features/indicators/Ltv'
 
 
 const IndicatorsPage: NextPage = () => { 
@@ -53,6 +54,14 @@ const IndicatorsPage: NextPage = () => {
         </Row>
         <Row className="mb-3">
           <PlanFactAnalysis />
+        </Row>
+        <Row>
+          <Col>
+            <h2>LTV</h2>
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <Ltv />
         </Row>
         <Row>
           <Col>
