@@ -59,7 +59,6 @@ export async function salesByMonth(filter: FilterState) {
 }
 
 export async function ltvIndicators(filter: FilterState) {
-  console.log(JSON.stringify({ filter }, null, 4));
   const [saleResult, { registerCount } = { registerCount: 0 }] =
     await Promise.all([
       SalesPerformanceQuery(filter).first(),

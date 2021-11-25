@@ -3,7 +3,6 @@ import { salesByMonth } from "../../../models/indicators/ltv";
 
 const ltvSalesMonthHandler: NextApiHandler = async (request, response) => {
   const { filter } = request.body;
-  console.log(request.body);
   const result = await salesByMonth(filter);
   response.json({ result: "ok", data: result });
 };

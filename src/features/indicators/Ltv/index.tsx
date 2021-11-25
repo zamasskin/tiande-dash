@@ -2,6 +2,7 @@ import {Row, Col, Card, Form, ListGroup} from "react-bootstrap"
 
 import PeriodRegister from '../Filter/PeriodRegister'
 import Calculations from './Calculations'
+import SalesMonth from './SalesMonth'
 
 function Ltv() {
   return (
@@ -22,12 +23,7 @@ function Ltv() {
             </Row>
             <Row>
               <Col>
-                <Card border="light">
-                  <Card.Body>
-                    <Card.Title>Продажи по месяцам</Card.Title>
-                    <Card.Text>123</Card.Text>
-                  </Card.Body>
-                </Card>
+                <SalesMonth />
               </Col>
               <Col>
                 <Card border="light">
