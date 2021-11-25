@@ -73,9 +73,6 @@ export function SalesMonthGroup({data = []}: {data: SalesMonthGroup[]}) {
       </>
     )
   }
- 
-  return null;
- 
 }
 
 export function GroupItem({year, data = []}) {
