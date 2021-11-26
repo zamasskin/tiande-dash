@@ -156,11 +156,12 @@ export function prepareUserNew(
   start: number,
   end: number
 ): Knex.QueryBuilder {
-  if (start > 0 && end > 0) {
+  if (start > 0) {
+    qb = joinUser(qb).where("u.DATE_REGISTER", ">=", start);
+  }
+  if (end > 0) {
     const endDate = moment(end).add(1, "days").toDate();
-    return joinUser(qb)
-      .where("u.DATE_REGISTER", ">=", start)
-      .where("u.DATE_REGISTER", "<", endDate);
+    qb = joinUser(qb).where("u.DATE_REGISTER", "<", endDate);
   }
   return qb;
 }
