@@ -157,11 +157,14 @@ export function prepareUserNew(
   end: number
 ): Knex.QueryBuilder {
   if (start > 0) {
-    qb = joinUser(qb).where("u.DATE_REGISTER", ">=", start);
+    const dateStart = moment(start).set({ hour: 0, minute: 0, second: 0 });
+    qb = joinUser(qb).where("u.DATE_REGISTER", ">=", dateStart.toDate());
   }
   if (end > 0) {
-    const endDate = moment(end).add(1, "days").toDate();
-    qb = joinUser(qb).where("u.DATE_REGISTER", "<", endDate);
+    const endDate = moment(end)
+      .add(1, "days")
+      .set({ hour: 23, minute: 59, second: 59 });
+    qb = joinUser(qb).where("u.DATE_REGISTER", "<", endDate.toDate());
   }
   return qb;
 }
