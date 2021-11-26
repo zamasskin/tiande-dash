@@ -60,7 +60,6 @@ export async function fetchLtvSalesMonth(filter: FilterState) {
 }
 
 export async function fetchPurchasesInPeriod(filter: FilterState) {
-  console.log(1);
   const response = await axios.post<Response>(
     getUrl("/api/indicators/purchases-in-period"),
     { filter }
