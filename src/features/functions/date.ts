@@ -23,6 +23,12 @@ export function getFilterMonthAgo(filter: FilterState) {
     ...filter,
     periodStart: addMonth(filter.periodStart, -1),
     periodEnd: addMonth(filter.periodEnd, -1),
+    periodUserNewStart:
+      filter.periodUserNewStart > 0
+        ? addMonth(filter.periodUserNewStart, -1)
+        : 0,
+    periodUserNewEnd:
+      filter.periodUserNewEnd > 0 ? addMonth(filter.periodUserNewEnd, -1) : 0,
   };
 }
 
@@ -31,6 +37,12 @@ export function getFilterYearAgo(filter: FilterState) {
     ...filter,
     periodStart: addYear(filter.periodStart, -1),
     periodEnd: addYear(filter.periodEnd, -1),
+    periodUserNewStart:
+      filter.periodUserNewStart > 0
+        ? addYear(filter.periodUserNewStart, -1)
+        : 0,
+    periodUserNewEnd:
+      filter.periodUserNewEnd > 0 ? addYear(filter.periodUserNewEnd, -1) : 0,
   };
 }
 
