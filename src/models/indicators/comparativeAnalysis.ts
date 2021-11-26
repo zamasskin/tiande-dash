@@ -29,15 +29,6 @@ export async function comparativeAnalysis(filter: FilterState) {
   const filterMonthAgo = getFilterMonthAgo(filter),
     filterYearAgo = getFilterYearAgo(filter);
 
-  // console.log([
-  //   comparativeAnalysisQuery(filter).first().toQuery(),
-  //   "_".repeat(100),
-  //   comparativeAnalysisQuery(filterMonthAgo).first().toQuery(),
-  //   "_".repeat(100),
-  //   comparativeAnalysisQuery(filterYearAgo).first().toQuery(),
-  //   "_".repeat(100),
-  // ]);
-
   const [p1, p2, p3] = await Promise.all([
     comparativeAnalysisQuery(filter).first(),
     comparativeAnalysisQuery(filterMonthAgo).first(),
@@ -52,7 +43,6 @@ export async function comparativeAnalysis(filter: FilterState) {
   const callPercent = (sum1: number, sum2: number) =>
     (Number((sum1 / sum2) * 100) || 0).toFixed(2) + "%";
 
-  console.log(salesFirstMonth, p1, p2, p3);
   return [
     {
       price: numberFormatRub(salesFirstMonth),
