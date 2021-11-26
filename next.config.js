@@ -3,6 +3,7 @@
  */
 
 module.exports = {
+  //1
   // typescript: {
   //   ignoreBuildErrors: true,
   // },
