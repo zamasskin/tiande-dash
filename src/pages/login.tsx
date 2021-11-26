@@ -1,6 +1,6 @@
+import  React, { useState, useEffect, useRef } from 'react';
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import  { useState, useEffect, useRef } from 'react';
 import { Form, Button, Container, Row, Col, Alert, Spinner } from 'react-bootstrap'
 import Router from 'next/router'
 
