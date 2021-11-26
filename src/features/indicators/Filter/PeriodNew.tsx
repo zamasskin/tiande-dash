@@ -19,9 +19,10 @@ function PeriodNew() {
     startDate={periodStart > 0 ? moment(periodStart) : null}
     endDate={periodEnd > 0 ? moment(periodEnd): null}
     name="period"
+    clear={true}
     onChange={({ startDate, endDate}) => {
-      startDate && dispatch(setPeriodUserNewStart(startDate.toDate().getTime()))
-      endDate && dispatch(setPeriodUserNewEnd(endDate.toDate().getTime()))
+      dispatch(setPeriodUserNewStart(startDate ? startDate.toDate().getTime() : 0))
+      dispatch(setPeriodUserNewEnd(endDate ? endDate.toDate().getTime() : 0))
     }}/>
 }
 
