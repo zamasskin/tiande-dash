@@ -10,7 +10,7 @@
     "env-build": "npm run env-activate && npm run build",
     "type-check": "tsc",
     "test": "jest",
-    "pm2": "pm2 start -i 4 npm --name \"my\" -- run start-env"
+    "pm2": "pm2 start -i 4 npm --name tiande-dash  -- run start-env"
   },
   "dependencies": {
     "add": "^2.0.6",
