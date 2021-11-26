@@ -26,6 +26,12 @@ const Login: NextPage = () => {
       .catch(err => setValues({...values, error: err.message,  load: false}))
   }
 
+  const handleKeyPress = (target) => {
+    if(target.charCode==13){
+      sendForm();
+    } 
+  }
+
   return (
    <>
       <Head>
@@ -41,7 +47,7 @@ const Login: NextPage = () => {
                 <Col md="12" id="login-box">
                   <Form id="login-form" className="form">
                     <h3 className="text-center text-info">Авторизация</h3>
-                    <Form.Group className="form-group" controlId="type">
+                    <Form.Group className="form-group" controlId="type" onSubmit={sendForm}>
                       <Form.Check 
                         inline 
                         label="Оnline Business Center" 
@@ -71,6 +77,7 @@ const Login: NextPage = () => {
                         placeholder="" 
                         value={values.login}
                         onChange={(ev) => setValues({...values, login: ev.target.value})}
+                        onKeyPress={handleKeyPress}
                       />
                     </Form.Group>
                     <Form.Group className="form-group" controlId="login">
@@ -80,6 +87,7 @@ const Login: NextPage = () => {
                         placeholder=""
                         value={values.password}
                         onChange={(ev) => setValues({...values, password: ev.target.value})}
+                        onKeyPress={handleKeyPress}
                       />
                     </Form.Group>
                     <Form.Group className="form-group" controlId="submit">
