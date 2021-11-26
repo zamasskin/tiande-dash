@@ -4,6 +4,9 @@
     "dev": "next -p 3002",
     "build": "next build",
     "start": "next start -p 26000",
+    "start-env": "npm run env-activate && next start -p 26000",
+    "env-install": "nodeenv --node=12.22.1 env",
+    "env-activate": ". env/bin/activate",
     "type-check": "tsc",
     "test": "jest"
   },
