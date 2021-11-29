@@ -11,7 +11,8 @@ interface SalesMonthItems {
   salesSum: string;
   saleUsersCount: number;
   month: "string",
-  year: number
+  year: number,
+  proportion: number
 }
 interface SalesMonthGroup {
   year: string,
@@ -41,6 +42,7 @@ function SalesMonth() {
                 <th>Месяц</th>
                 <th>Продажи</th>
                 <th>Клиенты</th>
+                <th>Доля от клиентов</th>
               </tr>
             </thead>
             <SalesMonthGroup data={data} />
@@ -100,6 +102,7 @@ export function Item({data}: {data: SalesMonthItems}) {
       <td>{data.month}</td>
       <td>{data.salesSum}</td>
       <td>{data.saleUsersCount}</td>
+      <td>{data.proportion}</td>
     </tr>
   )
 }

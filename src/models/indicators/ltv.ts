@@ -40,7 +40,10 @@ export function salesByMonthQuery(filter: FilterState) {
 }
 
 export async function salesByMonth(filter: FilterState) {
-  let indicators = await salesByMonthQuery(filter);
+  let [{ saleUsersCount }, indicators] = await Promise.all([
+    SalesPerformanceQuery(filter).first(),
+    salesByMonthQuery(filter),
+  ]);
   const getMonthAndYear = (date: string) => {
     const $date = moment(date, "YYYY-MM").locale("ru");
     return {
@@ -51,6 +54,8 @@ export async function salesByMonth(filter: FilterState) {
   indicators = indicators.map((indicator) => ({
     ...indicator,
     salesSum: numberFormatRub(indicator.salesSum),
+    saleUsersCount: util.format("%s чел", indicator.saleUsersCount),
+    proportion: numberFormat(saleUsersCount / indicator.saleUsersCount, 2),
     ...getMonthAndYear(indicator.date),
   }));
   return _.chain(indicators)
@@ -92,10 +97,14 @@ export function purchasesInPeriodQuery(filter: FilterState) {
 }
 
 export async function purchasesInPeriod(filter: FilterState) {
-  const result = await purchasesInPeriodQuery(filter);
-  return result.map((item) => ({
+  const [{ saleUsersCount }, items] = await Promise.all([
+    SalesPerformanceQuery(filter).first(),
+    purchasesInPeriodQuery(filter),
+  ]);
+  return items.map((item) => ({
     cnt: util.format("%s раз", item.cnt),
     count: util.format("%s чел", item.count),
+    proportion: numberFormat(saleUsersCount / item.count, 2),
   }));
 }
 

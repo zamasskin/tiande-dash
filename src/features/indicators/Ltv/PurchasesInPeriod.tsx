@@ -25,6 +25,7 @@ function PurchasesInPeriod() {
             <tr>
               <th>Количество покупок</th>
               <th>Количество человек</th>
+              <th>Доля от клиентов</th>
             </tr>
           </thead>
           <tbody>
@@ -33,6 +34,7 @@ function PurchasesInPeriod() {
                 <tr key={i}>
                   <td>{item.cnt}</td>
                   <td>{item.count}</td>
+                  <td>{item.proportion}</td>
                 </tr>
               ))
             }
