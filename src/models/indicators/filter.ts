@@ -17,23 +17,32 @@ import { endTime, startTime } from "../../features/functions/date";
 
 export type yn = 0 | 1 | 2;
 
+export function valToYn<T>(val: T): yn {
+  const result = Number(val) || 0;
+  return result as yn;
+}
+
 export function prepareFilter(query: Knex.QueryBuilder, filter: FilterState) {
-  query = preparePeriod(query, filter.periodStart, filter.periodEnd);
-  query = prepareCountry(query, filter.country);
+  query = preparePeriod(
+    query,
+    Number(filter.periodStart) || 0,
+    Number(filter.periodEnd) || 0
+  );
+  query = prepareCountry(query, Number(filter.country) || 0);
   query = prepareStorage(query, filter.storage);
   query = prepareCurrency(query, filter.currency);
-  query = prepareIsApp(query, filter.isApp);
-  query = prepareLoyalty(query, filter.loyalty);
+  query = prepareIsApp(query, valToYn(filter.isApp));
+  query = prepareLoyalty(query, valToYn(filter.loyalty));
   query = preparePickup(query, filter.pickup);
-  query = preparePayOrder(query, filter.payOrder);
+  query = preparePayOrder(query, valToYn(filter.payOrder));
   query = prepareRegistrationMethod(query, filter.registrationMethod);
   query = prepareUserNew(
     query,
-    filter.periodUserNewStart,
-    filter.periodUserNewEnd
+    Number(filter.periodUserNewStart) || 0,
+    Number(filter.periodUserNewEnd) || 0
   );
-  query = prepareEs(query, filter.isEs);
-  query = prepareBoutique(query, filter.isBoutique);
+  query = prepareEs(query, valToYn(filter.isEs));
+  query = prepareBoutique(query, valToYn(filter.isBoutique));
   return query;
 }
 
