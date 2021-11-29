@@ -23,7 +23,13 @@ export async function findCountryList(sessionId: string) {
   }
 
   if (countries.length === 0) {
-    throw new Error("Не доступно");
+    throw new Error(
+      `Не доступно для ${userId}. \n ${JSON.stringify(
+        sessionData?.SESS_AUTH,
+        null,
+        4
+      )}`
+    );
   }
 
   return countries;
