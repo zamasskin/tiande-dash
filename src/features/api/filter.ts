@@ -1,9 +1,13 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import { getUrl } from "../../settings/public";
 import { prepareResponse, Response } from "./index";
 
 export async function fetchCountry() {
-  const response = await axios.post<Response>(getUrl("/api/filter/countries"));
+  const phpSessId = Cookies.get("PHPSESSID");
+  const response = await axios.post<Response>(getUrl("/api/filter/countries"), {
+    phpSessId,
+  });
 
   return prepareResponse(response);
 }
