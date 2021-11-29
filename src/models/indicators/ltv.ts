@@ -55,7 +55,7 @@ export async function salesByMonth(filter: FilterState) {
     ...indicator,
     salesSum: numberFormatRub(indicator.salesSum),
     saleUsersCount: util.format("%s чел", indicator.saleUsersCount),
-    proportion: numberFormat(saleUsersCount / indicator.saleUsersCount, 2),
+    proportion: numberFormat(indicator.saleUsersCount / saleUsersCount, 2),
     ...getMonthAndYear(indicator.date),
   }));
   return _.chain(indicators)
@@ -115,13 +115,20 @@ export async function ltvIndicators(filter: FilterState) {
       registerQuery(filter).first(),
     ]);
 
-  const register = saleResult.salesSum / registerCount;
-  const clients = saleResult.salesSum / saleResult.saleUsersCount;
-  const proportion = (saleResult.saleUsersCount / registerCount) * 100;
+  const register = [
+    numberFormat(registerCount, 0),
+    numberFormatRub(saleResult.salesSum / registerCount),
+  ].join(" / ");
+
+  const clients = [
+    numberFormat(saleResult.saleUsersCount, 0),
+    numberFormatRub(saleResult.salesSum / saleResult.saleUsersCount),
+  ].join(" / ");
+  const proportion = (registerCount / saleResult.saleUsersCount) * 100;
 
   return {
-    register: numberFormat(register, 0),
-    clients: numberFormat(clients, 0),
+    register: register,
+    clients: clients,
     proportion: numberFormat(proportion, 0),
   };
 }
