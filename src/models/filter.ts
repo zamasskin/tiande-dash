@@ -26,7 +26,11 @@ export async function findCountryList(sessionId: string) {
     throw new Error(
       `Не доступно для ${userId}. Возможно не правильно настроен домен ${
         process.env.NEXT_PUBLIC_DOMAIN
-      }. \n ${JSON.stringify(sessionData?.SESS_AUTH, null, 4)}`
+      }. Если пользователь не найден, то проблема с сессией ${sessionId}\n ${JSON.stringify(
+        sessionData,
+        null,
+        4
+      )}`
     );
   }
 
