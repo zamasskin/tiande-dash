@@ -24,11 +24,9 @@ export async function findCountryList(sessionId: string) {
 
   if (countries.length === 0) {
     throw new Error(
-      `Не доступно для ${userId}. \n ${JSON.stringify(
-        sessionData?.SESS_AUTH,
-        null,
-        4
-      )}`
+      `Не доступно для ${userId}. Возможно не правильно настроен домен ${
+        process.env.NEXT_PUBLIC_DOMAIN
+      }. \n ${JSON.stringify(sessionData?.SESS_AUTH, null, 4)}`
     );
   }
 
