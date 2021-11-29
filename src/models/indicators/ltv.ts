@@ -4,18 +4,32 @@ import util from "util";
 
 import { qb as knex } from "../../settings";
 import { indicatorsQuery, currencyRateJoin, joinLocationProps } from ".";
-import { prepareLtvFilter, prepareFilter } from "./filter";
+import { prepareFilter } from "./filter";
 import { FilterState } from "../../features/indicators/filterSlice";
 import { numberFormat, numberFormatRub } from "../number";
 import { SalesPerformanceQuery } from "./salesPerformance";
+import { endTime, startTime } from "../../features/functions/date";
 
 export function registerQuery(filter: FilterState) {
-  let query = indicatorsQuery();
-  query = currencyRateJoin(query);
-  query = joinLocationProps(query);
-  query = prepareLtvFilter(query, filter);
-
-  query = query.select(knex.raw("COUNT(distinct o.USER_ID) as registerCount"));
+  let query = knex({ u: "b_user" }).leftJoin(
+    { ut: "b_uts_user" },
+    "ut.VALUE_ID",
+    "u.ID"
+  );
+  if (Number(filter.country)) {
+    query.where("ut.UF_COUNTRY", filter.country);
+  }
+  if (
+    Number(filter.periodUserRegisterStart) &&
+    Number(filter.periodUserRegisterEnd)
+  ) {
+    const start = startTime(filter.periodUserRegisterStart);
+    const end = endTime(filter.periodUserRegisterEnd);
+    query = query
+      .where("u.DATE_REGISTER", ">=", new Date(start))
+      .where("u.DATE_REGISTER", "<=", new Date(end));
+  }
+  query = query.select(knex.raw("COUNT(distinct u.ID) as registerCount"));
   return query;
 }
 

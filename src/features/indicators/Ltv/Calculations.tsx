@@ -18,10 +18,10 @@ function Calculations() {
   return (
     <>
       <Col>
-        <Item title="Количество регистраций" preloader={preloader}>{data.register}</Item>
+        <Item title="Количество регистраций / LTV" preloader={preloader}>{data.register}</Item>
       </Col>
       <Col>
-        <Item title="Количество клиентов" preloader={preloader}>{data.clients}</Item>
+        <Item title="Количество клиентов / LTV" preloader={preloader}>{data.clients}</Item>
       </Col>
       <Col>
         <Item title="Доля активных клиентов" preloader={preloader}>{data.proportion}</Item>

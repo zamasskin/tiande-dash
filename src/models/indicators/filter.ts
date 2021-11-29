@@ -55,21 +55,6 @@ export function prepareFilterPlanFactIndicators(
   return query;
 }
 
-export function prepareLtvFilter(
-  query: Knex.QueryBuilder,
-  filter: FilterState
-) {
-  const newFilter = { ...filter, periodUserNewStart: 0, periodUserNewEnd: 0 };
-  query = prepareFilter(query, newFilter);
-  query = prepareUserCountry(query, filter.country);
-  prepareUserNew(
-    query,
-    filter.periodUserRegisterStart,
-    filter.periodUserRegisterEnd
-  );
-  return query;
-}
-
 export function preparePeriod(
   qb: Knex.QueryBuilder,
   start: number,
