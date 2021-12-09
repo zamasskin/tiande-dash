@@ -118,7 +118,7 @@ export async function purchasesInPeriod(filter: FilterState) {
   return items.map((item) => ({
     cnt: util.format("%s раз", item.cnt),
     count: util.format("%s чел", item.count),
-    proportion: numberFormat(saleUsersCount / item.count, 2),
+    proportion: numberFormat(item.count / saleUsersCount, 2),
   }));
 }
 
@@ -138,7 +138,7 @@ export async function ltvIndicators(filter: FilterState) {
     numberFormat(saleResult.saleUsersCount, 0),
     numberFormatRub(saleResult.salesSum / saleResult.saleUsersCount),
   ].join(" / ");
-  const proportion = (registerCount / saleResult.saleUsersCount) * 100;
+  const proportion = (saleResult.saleUsersCount / registerCount) * 100;
 
   return {
     register: register,
