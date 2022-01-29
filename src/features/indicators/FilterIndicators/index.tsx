@@ -107,6 +107,7 @@ export default function FilterIndicators({apply, value}) {
               onChange={(ev: any) => apply({...value, registrationMethod: ev.target.value})}
             />
           </FormGroup>
+          {/* Страны ЕС */}
           <FormGroup controlId="is-es" title="Страны ЕС">
             <SelectYN 
               size="lg"
@@ -114,6 +115,7 @@ export default function FilterIndicators({apply, value}) {
               onChange={(ev: any) => apply({...value, isEs: ev.target.value})}
             />
           </FormGroup>
+          {/* Бутик тианде */}
           <FormGroup controlId="is-boutique" title="Бутик тианде">
               <SelectYN 
                 size="lg"
