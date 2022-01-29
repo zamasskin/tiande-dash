@@ -1,5 +1,5 @@
 import moment from 'moment'
-import {Card, Row, Col, Form} from 'react-bootstrap'
+import {Card, Row, Form} from 'react-bootstrap'
 
 
 import FormGroup from '../../components/UI/FormGroup'
@@ -126,6 +126,5 @@ export default function FilterIndicators({apply, value}) {
         </Row>
       </Form>
     </Card.Body>
-    
   </Card>
 }
