@@ -1,5 +1,6 @@
 import { Knex } from "knex";
 import util from "util";
+import * as uuid from "uuid";
 
 import { qb as knex } from "../../settings";
 import {
@@ -121,7 +122,7 @@ export function SalesPerformanceQuery(filter: FilterState) {
   return query;
 }
 
-export async function SalesPerformanceResult(filter: FilterState) {
+export async function SalesPerformanceResult(filter: FilterState, title = "") {
   const days = indicators.diff(filter.periodStart, filter.periodEnd);
   const result = await SalesPerformanceQuery(filter).first();
   const { periodStart, periodEnd } = filter;
@@ -133,6 +134,8 @@ export async function SalesPerformanceResult(filter: FilterState) {
   //countUserNew
   if (result) {
     return {
+      id: uuid.v4(),
+      title,
       days,
       period,
       salesSum: numberFormatRub(result.salesSum),
@@ -174,8 +177,14 @@ export function SalesPerformance(filter: FilterState) {
   const filterMonthAgo = getFilterMonthAgo(filter),
     filterYearAgo = getFilterYearAgo(filter);
   return Promise.all([
-    SalesPerformanceResult(filter),
-    SalesPerformanceResult(filterMonthAgo),
-    SalesPerformanceResult(filterYearAgo),
+    SalesPerformanceResult(filter, "Показатели текущего периода"),
+    SalesPerformanceResult(
+      filterMonthAgo,
+      "Показатели периода со сдвигом -1 месяц"
+    ),
+    SalesPerformanceResult(
+      filterYearAgo,
+      "Показатели периода со сдвигом -1 год"
+    ),
   ]);
 }

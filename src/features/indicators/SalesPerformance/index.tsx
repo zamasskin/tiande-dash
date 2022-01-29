@@ -2,10 +2,10 @@ import moment from 'moment';
 import { useState, useEffect } from 'react';
 import { Col, Card, Table} from 'react-bootstrap'
 
-import { useAppSelector } from '../../app/hooks';
-import { selectFilterIndicator } from './filterSlice';
-import { fetchSalesPerformance } from '../api/indicators';
-import { SalesPerformanceDefault } from '../../models/indicators/initData';
+import { useAppSelector } from '../../../app/hooks';
+import { selectFilterIndicator } from '../filterSlice';
+import { fetchSalesPerformance } from '../../api/indicators';
+import { SalesPerformanceDefault } from '../../../models/indicators/initData';
 
 
 function SalesPerformance() {

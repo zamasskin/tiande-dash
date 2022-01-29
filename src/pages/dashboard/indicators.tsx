@@ -9,6 +9,7 @@ import { getDefaultDateRange } from "../../features/functions/date";
 import FilterIndicators from "../../features/indicators/FilterIndicators"
 import { FilterState } from "../../features/indicators/FilterIndicators/interfaces";
 import ComparativeAnalysis from "../../features/indicators/ComparativeAnalysis/ComparativeAnalysis";
+import SalesPerformance from "../../features/indicators/SalesPerformance/SalesPerformance";
 
 const IndicatorsDashboardPage: NextPage<{filterValues: FilterState}> = ({filterValues}) => {
   const [filter, setFilter] = useState(filterValues);
@@ -43,6 +44,14 @@ const IndicatorsDashboardPage: NextPage<{filterValues: FilterState}> = ({filterV
       </Row>
       <Row className="mb-3">
         <ComparativeAnalysis filter={filter}/>
+      </Row>
+      <Row>
+        <Col>
+          <h2>Показатели продаж</h2>
+        </Col>
+      </Row>
+      <Row className="mb-3">
+        <SalesPerformance filter={filter}/>
       </Row>
     </Container>
     
