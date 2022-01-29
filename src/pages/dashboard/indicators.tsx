@@ -8,6 +8,7 @@ import { Container, Navbar, Row, Col} from 'react-bootstrap'
 import { getDefaultDateRange } from "../../features/functions/date";
 import FilterIndicators from "../../features/indicators/FilterIndicators"
 import { FilterState } from "../../features/indicators/FilterIndicators/interfaces";
+import ComparativeAnalysis from "../../features/indicators/ComparativeAnalysis/ComparativeAnalysis";
 
 const IndicatorsDashboardPage: NextPage<{filterValues: FilterState}> = ({filterValues}) => {
   const [filter, setFilter] = useState(filterValues);
@@ -34,6 +35,14 @@ const IndicatorsDashboardPage: NextPage<{filterValues: FilterState}> = ({filterV
         <Col>
           <FilterIndicators apply={applyFilter} value={filter}/>
         </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h2>Сравнительных анализ абс. отклонений</h2>
+        </Col>
+      </Row>
+      <Row className="mb-3">
+        <ComparativeAnalysis filter={filter}/>
       </Row>
     </Container>
     

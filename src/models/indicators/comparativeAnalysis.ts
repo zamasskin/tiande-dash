@@ -45,18 +45,26 @@ export async function comparativeAnalysis(filter: FilterState) {
 
   return [
     {
+      id: "p1",
+      name: "Продажи 1 месяц",
       price: numberFormatRub(salesFirstMonth),
       percent: callPercent(salesFirstMonth, p2.sales_sum),
     },
     {
+      id: "p2",
+      name: "Продажи 1 год",
       price: numberFormatRub(salesFirstYear),
       percent: callPercent(salesFirstYear, p3.sales_sum),
     },
     {
+      id: "p3",
+      name: "Средний чек 1 месяц",
       price: numberFormatRub(averageCheckFirstMonth),
       percent: callPercent(averageCheckFirstMonth, p2.average_check),
     },
     {
+      id: "p4",
+      name: "Средний чек 1 год",
       price: numberFormatRub(averageCheckFirstYear),
       percent: callPercent(averageCheckFirstYear, p3.average_check),
     },
