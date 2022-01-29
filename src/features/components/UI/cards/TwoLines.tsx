@@ -13,14 +13,14 @@ function TwoLines({ top, bottom }) {
   );
 }
 
-TwoLines.Placeholder = () => (
+TwoLines.Placeholder = ({ col = 8 }) => (
   <Card className="shadow-sm">
     <Card.Body className="placeholder-glow">
       <p className="card-title text-md-left">
         <span className="placeholder col-5"></span>
       </p>
       <p>
-        <span className="placeholder placeholder-lg col-8"></span>
+        <span className={"placeholder placeholder-lg col-" + col}></span>
       </p>
     </Card.Body>
   </Card>
