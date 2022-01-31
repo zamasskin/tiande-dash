@@ -25,11 +25,11 @@ export default function PlanFactAnalysis({ filter }) {
     <>
       {Object.entries(titles).map(([key, title]) =>
         preloader || Object.keys(data).length === 0 ? (
-          <Col>
+          <Col key={key}>
             <TwoLines.Placeholder />
           </Col>
         ) : (
-          <Col>
+          <Col key={key}>
             <TwoLines top={title} bottom={data[key]} />
           </Col>
         )
