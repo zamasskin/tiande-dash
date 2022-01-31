@@ -12,6 +12,7 @@ import SalesPerformance from "../../features/indicators/SalesPerformance/SalesPe
 import PlanFactAnalysis from "../../features/indicators/PlanFactAnalysis/PlanFactAnalysis";
 import Ltv from "../../features/indicators/Ltv/Ltv";
 import DeliveryList from "../../features/indicators/DeliveryList/DeliveryList";
+import DeliveryGroupList from "../../features/indicators/DeliveryGroupList/DeliveryGroupList";
 
 const IndicatorsDashboardPage: NextPage<{ filterValues: FilterState }> = ({
   filterValues,
@@ -85,6 +86,14 @@ const IndicatorsDashboardPage: NextPage<{ filterValues: FilterState }> = ({
         </Row>
         <Row className="mb-3">
           <DeliveryList filter={filter} />
+        </Row>
+        <Row>
+          <Col>
+            <h2>Распределение по способу получения</h2>
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <DeliveryGroupList filter={filter} />
         </Row>
       </Container>
     </>

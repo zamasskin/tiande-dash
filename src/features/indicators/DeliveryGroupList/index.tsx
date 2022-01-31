@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Col, Card, Table} from 'react-bootstrap'
+import { useState, useEffect } from "react";
+import { Col, Card, Table } from "react-bootstrap";
 
-import { useAppSelector } from '../../app/hooks';
-import { selectFilterIndicator } from './filterSlice';
-import { fetchDeliveryGroupList } from '../api/indicators';
+import { useAppSelector } from "../../../app/hooks";
+import { selectFilterIndicator } from "../filterSlice";
+import { fetchDeliveryGroupList } from "../../api/indicators";
 
 function DeliveryGroupList() {
   const filter = useAppSelector(selectFilterIndicator);
@@ -11,11 +11,11 @@ function DeliveryGroupList() {
   const [preloader, setPreloader] = useState(false);
   useEffect(() => {
     (async () => {
-      setPreloader(true)
-      setData(await fetchDeliveryGroupList(filter))
+      setPreloader(true);
+      setData(await fetchDeliveryGroupList(filter));
     })().finally(() => setPreloader(false));
-  }, [filter])
-  
+  }, [filter]);
+
   return (
     <Col>
       <Card className={preloader ? "shadow-sm preloader" : "shadow-sm"}>
@@ -29,7 +29,7 @@ function DeliveryGroupList() {
               </tr>
             </thead>
             <tbody>
-              {deliveryGroupList.map(({type, sum, share}, i) => (
+              {deliveryGroupList.map(({ type, sum, share }, i) => (
                 <tr key={i}>
                   <td>{type}</td>
                   <td>{sum}</td>
@@ -41,7 +41,7 @@ function DeliveryGroupList() {
         </Card.Body>
       </Card>
     </Col>
-  )
+  );
 }
 
-export default DeliveryGroupList
+export default DeliveryGroupList;
