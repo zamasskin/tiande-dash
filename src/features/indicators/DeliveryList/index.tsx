@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Col, Card, Table} from 'react-bootstrap'
+import { useState, useEffect } from "react";
+import { Col, Card, Table } from "react-bootstrap";
 
-import { useAppSelector } from '../../app/hooks';
-import { selectFilterIndicator } from './filterSlice';
-import { fetchDeliveryList } from '../api/indicators';
+import { useAppSelector } from "../../../app/hooks";
+import { selectFilterIndicator } from "../filterSlice";
+import { fetchDeliveryList } from "../../api/indicators";
 
 function DeliveryList() {
   const filter = useAppSelector(selectFilterIndicator);
@@ -11,10 +11,10 @@ function DeliveryList() {
   const [preloader, setPreloader] = useState(false);
   useEffect(() => {
     (async () => {
-      setPreloader(true)
-      setData(await fetchDeliveryList(filter))
+      setPreloader(true);
+      setData(await fetchDeliveryList(filter));
     })().finally(() => setPreloader(false));
-  }, [filter])
+  }, [filter]);
   return (
     <Col>
       <Card className={preloader ? "shadow-sm preloader" : "shadow-sm"}>
@@ -28,7 +28,7 @@ function DeliveryList() {
               </tr>
             </thead>
             <tbody>
-              {deliveryList.map(({name, type, sum, share}, i) => (
+              {deliveryList.map(({ name, type, sum, share }, i) => (
                 <tr key={i}>
                   <td>
                     <b>{name}</b> - {type}
@@ -42,7 +42,7 @@ function DeliveryList() {
         </Card.Body>
       </Card>
     </Col>
-  )
+  );
 }
 
-export default DeliveryList
+export default DeliveryList;

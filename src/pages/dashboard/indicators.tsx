@@ -11,6 +11,7 @@ import ComparativeAnalysis from "../../features/indicators/ComparativeAnalysis/C
 import SalesPerformance from "../../features/indicators/SalesPerformance/SalesPerformance";
 import PlanFactAnalysis from "../../features/indicators/PlanFactAnalysis/PlanFactAnalysis";
 import Ltv from "../../features/indicators/Ltv/Ltv";
+import DeliveryList from "../../features/indicators/DeliveryList/DeliveryList";
 
 const IndicatorsDashboardPage: NextPage<{ filterValues: FilterState }> = ({
   filterValues,
@@ -76,6 +77,14 @@ const IndicatorsDashboardPage: NextPage<{ filterValues: FilterState }> = ({
         </Row>
         <Row className="mb-3">
           <Ltv filter={filter} setFilter={applyFilter} />
+        </Row>
+        <Row>
+          <Col>
+            <h2>Распределение по службам доставок</h2>
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <DeliveryList filter={filter} />
         </Row>
       </Container>
     </>
