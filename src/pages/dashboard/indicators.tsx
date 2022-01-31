@@ -10,6 +10,7 @@ import { FilterState } from "../../features/indicators/FilterIndicators/interfac
 import ComparativeAnalysis from "../../features/indicators/ComparativeAnalysis/ComparativeAnalysis";
 import SalesPerformance from "../../features/indicators/SalesPerformance/SalesPerformance";
 import PlanFactAnalysis from "../../features/indicators/PlanFactAnalysis/PlanFactAnalysis";
+import Ltv from "../../features/indicators/Ltv/Ltv";
 
 const IndicatorsDashboardPage: NextPage<{ filterValues: FilterState }> = ({
   filterValues,
@@ -18,9 +19,13 @@ const IndicatorsDashboardPage: NextPage<{ filterValues: FilterState }> = ({
 
   function applyFilter(filter) {
     setFilter(filter);
-    Router.push({
-      query: filter,
-    });
+    Router.push(
+      {
+        query: filter,
+      },
+      undefined,
+      { scroll: false }
+    );
   }
 
   return (
@@ -63,6 +68,14 @@ const IndicatorsDashboardPage: NextPage<{ filterValues: FilterState }> = ({
         </Row>
         <Row className="mb-3">
           <PlanFactAnalysis filter={filter} />
+        </Row>
+        <Row>
+          <Col>
+            <h2>LTV</h2>
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <Ltv filter={filter} setFilter={applyFilter} />
         </Row>
       </Container>
     </>

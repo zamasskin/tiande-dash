@@ -1,8 +1,8 @@
 import { Card } from "react-bootstrap";
 
-function TwoLines({ top, bottom }) {
+function TwoLines({ top, bottom, ...props }) {
   return (
-    <Card className="shadow-sm">
+    <Card className="shadow-sm" {...props}>
       <Card.Body>
         <p className="card-title text-md-left">{top}</p>
         <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
@@ -13,8 +13,8 @@ function TwoLines({ top, bottom }) {
   );
 }
 
-TwoLines.Placeholder = ({ col = 8 }) => (
-  <Card className="shadow-sm">
+TwoLines.Placeholder = ({ col = 8, ...props }) => (
+  <Card className="shadow-sm" {...props}>
     <Card.Body className="placeholder-glow">
       <p className="card-title text-md-left">
         <span className="placeholder col-5"></span>
