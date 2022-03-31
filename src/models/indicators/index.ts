@@ -112,6 +112,16 @@ export function joinIsBoutiqueProps(qb: Knex.QueryBuilder) {
       );
 }
 
+export function joinIsMarketplaceProps(qb: Knex.QueryBuilder) {
+  return checkRequiredJoin(qb, "op138", "b_sale_order_props_value")
+    ? qb
+    : qb.leftJoin({ op138: "b_sale_order_props_value" }, (qb) =>
+        qb
+          .on("op138.ORDER_ID", "o.ID")
+          .andOn("op138.ORDER_PROPS_ID", knex.raw(138))
+      );
+}
+
 export function joinUser(qb: Knex.QueryBuilder) {
   return checkRequiredJoin(qb, "u", "b_user")
     ? qb

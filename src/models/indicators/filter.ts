@@ -6,6 +6,7 @@ import {
   joinBitCountry,
   joinIsAppProps,
   joinIsBoutiqueProps,
+  joinIsMarketplaceProps,
   joinLoyaltyProps,
   joinPickupProps,
   joinStorageProps,
@@ -43,6 +44,7 @@ export function prepareFilter(query: Knex.QueryBuilder, filter: FilterState) {
   );
   query = prepareEs(query, valToYn(filter.isEs));
   query = prepareBoutique(query, valToYn(filter.isBoutique));
+  query = prepareMarketplace(query, valToYn(filter.isMarketplace));
   return query;
 }
 
@@ -177,6 +179,17 @@ export function prepareBoutique(qb: Knex.QueryBuilder, isBoutique: yn) {
         .where("op8.VALUE", isBoutique === 1 ? "Y" : "N")
         .orWhereNull("op8.VALUE")
     );
+  }
+  return qb;
+}
+
+export function prepareMarketplace(qb: Knex.QueryBuilder, isMarketplace: yn) {
+  if (isMarketplace > 0) {
+    if (isMarketplace === 1) {
+      return joinIsMarketplaceProps(qb).whereNotNull("op138.VALUE");
+    } else {
+      return joinIsMarketplaceProps(qb).whereNull("op138.VALUE");
+    }
   }
   return qb;
 }

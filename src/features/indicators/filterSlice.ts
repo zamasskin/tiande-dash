@@ -18,6 +18,7 @@ export interface FilterState {
   periodUserNewEnd: number;
   isEs: yn;
   isBoutique: yn;
+  isMarketplace: yn;
   periodUserRegisterStart: number;
   periodUserRegisterEnd: number;
 }
@@ -39,6 +40,7 @@ const initialState: FilterState = {
   periodUserNewEnd: 0,
   isEs: 0,
   isBoutique: 0,
+  isMarketplace: 0,
   periodUserRegisterStart: startDate.getTime(),
   periodUserRegisterEnd: endDate.getTime(),
 };
@@ -89,6 +91,9 @@ export const indicatorsFilterSlice = createSlice({
     setIsBoutique(state, action: PayloadAction<yn>) {
       state.isBoutique = action.payload;
     },
+    setIsMarketplace(state, action: PayloadAction<yn>) {
+      state.isMarketplace = action.payload;
+    },
     setPeriodUserRegisterStart(state, action: PayloadAction<number>) {
       state.periodUserRegisterStart = action.payload;
     },
@@ -111,6 +116,7 @@ export const {
   setPeriodUserNewEnd,
   setIsEs,
   setIsBoutique,
+  setIsMarketplace,
   setPeriodStart,
   setPeriodEnd,
   setPeriodUserRegisterStart,
@@ -155,6 +161,9 @@ export const selectIsEs = (state: AppState) => state.indicatorsFilter.isEs;
 
 export const selectIsBoutique = (state: AppState) =>
   state.indicatorsFilter.isBoutique;
+
+export const selectIsMarketplace = (state: AppState) =>
+  state.indicatorsFilter.isMarketplace;
 
 export const selectFilterIndicator = (state: AppState) =>
   state.indicatorsFilter;
