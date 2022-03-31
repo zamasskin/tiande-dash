@@ -12,7 +12,7 @@ import RegisterMethod from "./RegisterMethod";
 import PeriodNew from "./PeriodNew";
 import IsEs from "./IsEs";
 import IsBoutique from "./IsBoutique";
-import IsMarketplace from "./isMarketplace";
+import IsMarketplace from "./IsMarketplace";
 
 function Filter() {
   return (
